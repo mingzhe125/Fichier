@@ -42,12 +42,6 @@ require_once './lib/functions.php';
     <header class="navbar navbar-inverse" role="navigation">
       <div class="header container-fluid">
         <div class="navbar-header col-lg-3 col-md-12">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="./index.php">
             <img src="./assets/img/logo.png" />
           </a>
@@ -61,7 +55,7 @@ require_once './lib/functions.php';
             _e('transfer!');
             ?></p>
         </div>
-        <div class="navbar-collapse collapse col-lg-3 col-md-6">
+        <div class="navbar-collapse col-lg-3 col-md-6">
           <div class="navbar">
             <div class="navbar-inner">
               <ul class="nav">
