@@ -8,10 +8,10 @@
 class WLanguage {
 
 	private $_langFileDir = '/languages';
-	private $_lang = 'en';
+	private $_lang = 'fr';
 	private $_langData = null;
 
-	const DEF_LANG = 'en';
+	const DEF_LANG = 'fr';
 
 	public function __construct() {
 		$this->_langFileDir = dirname(__FILE__) . $this->_langFileDir;

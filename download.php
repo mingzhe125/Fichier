@@ -8,16 +8,15 @@ $file_id = $_REQUEST['file'];
     <div class="container">
       <div class="main-content col-lg-4 col-md-4 col-lg-offset-4 col-md-offset-4">
         <div class="inner-content">
-          <div class="content-header"><p><?php _e('Files up to 5GB'); ?></p></div>
+          <div class="content-header"><p><?php _e('Download file'); ?></p></div>
           <form class='frm_contact' action="lib/download.php" method="post">
             <div class="content-body col-lg-12">
               <div class="form-group">
-                <label for="filepassword"><?php _e('Enter the password for protect file'); ?></label>
+                <label for="filepassword"><?php _e('Enter the password to download the file'); ?></label>
                 <input type="password" class="form-control" id='inputFilePassword' name='filepassword' />
               </div>
               <div class="form-group confirm_btn">
-                <button type="submit" ><?php _e('Download File'); ?></button>
-                <span class='file_protect'></span>
+                <button type="submit" ><?php _e('Download'); ?></button>
               </div>
             </div>
             <input type="hidden" name='file' value="<?php echo $file_id; ?>" />

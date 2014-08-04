@@ -10,7 +10,6 @@
  * @version 0.3
  *
  */
-session_start();
 $captcha = new SimpleCaptcha();
 
 

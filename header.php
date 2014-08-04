@@ -41,12 +41,12 @@ require_once './lib/functions.php';
     <![endif]-->
     <header class="navbar navbar-inverse" role="navigation">
       <div class="header container-fluid">
-        <div class="navbar-header col-lg-3 col-md-12">
+        <div class="navbar-header col-lg-2 col-md-3">
           <a class="navbar-brand" href="./index.php">
             <img src="./assets/img/logo.png" />
           </a>
         </div>
-        <div class="site-info col-lg-6 col-md-6">
+        <div class="site-info col-lg-6 col-md-5">
           <p><?php
             _e('Send large files for free up');
             echo '<span class="blue">&nbsp;&nbsp;';
@@ -55,7 +55,7 @@ require_once './lib/functions.php';
             _e('transfer!');
             ?></p>
         </div>
-        <div class="navbar-collapse col-lg-3 col-md-6">
+        <div class="navbar-collapse col-lg-4 col-md-4">
           <div class="navbar">
             <div class="navbar-inner">
               <ul class="nav">

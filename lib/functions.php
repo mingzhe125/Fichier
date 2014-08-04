@@ -1,8 +1,28 @@
 <?php
 
-error_reporting(~E_ALL);
+//error_reporting(~E_ALL);
 
-session_start();
+function my_session_start() {
+  $sn = session_name();
+  if (isset($_COOKIE[$sn])) {
+    $sessid = $_COOKIE[$sn];
+  } else if (isset($_GET[$sn])) {
+    $sessid = $_GET[$sn];
+  } else {
+    return session_start();
+  }
+
+  if (!preg_match('/^[a-zA-Z0-9,\-]{22,40}$/', $sessid)) {
+    return false;
+  }
+  return session_start();
+}
+
+if (!my_session_start()) {
+  session_id(uniqid());
+  session_start();
+  session_regenerate_id();
+}
 
 require_once dirname(__FILE__) . '/language.php';
 require_once dirname(__FILE__) . '/class.db.php';
