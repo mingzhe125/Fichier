@@ -124,6 +124,7 @@ $(document).ready(function() {
 //			return false;
 //		});
 //	}
+
   if ($('.fancy_image').length > 0) {
     $(".fancy_image").click(function() {
       fancy_width = $('.container').width() * 0.7;
@@ -145,6 +146,63 @@ $(document).ready(function() {
       $('.password-wrapper').show('medium');
     });
   }
+
+  var tolltip_trigger = 'click_help';
+
+  if ($('.site_help').length > 0) {
+    $('.site_help').click(function() {
+      $('#dropbox').trigger(tolltip_trigger);
+      $('#from_email').trigger(tolltip_trigger);
+      $('#to_email').trigger(tolltip_trigger);
+      $('#inputMessage').trigger(tolltip_trigger);
+      $('.confirm_btn').trigger(tolltip_trigger);
+    });
+  }
+
+  $('#dropbox').tooltipster({
+    animation: 'grow',
+    content: 'Glissez déposez vos fichiers',
+    multiple: true,
+    position: 'right',
+    theme: 'tooltipster-light',
+    trigger: tolltip_trigger
+  });
+
+  $('#from_email').tooltipster({
+    animation: 'grow',
+    content: 'Ajouer votre   adresse email ici',
+    multiple: true,
+    position: 'right',
+    theme: 'tooltipster-light',
+    trigger: tolltip_trigger
+  });
+
+  $('#to_email').tooltipster({
+    animation: 'grow',
+    content: 'Ajouer les adresses email des destinataires',
+    multiple: true,
+    position: 'left',
+    theme: 'tooltipster-shadow',
+    trigger: tolltip_trigger
+  });
+
+  $('#inputMessage').tooltipster({
+    animation: 'grow',
+    content: 'Joignez un message à votre transfert',
+    multiple: true,
+    position: 'left',
+    theme: 'tooltipster-shadow',
+    trigger: tolltip_trigger
+  });
+
+  $('.confirm_btn').tooltipster({
+    animation: 'grow',
+    content: 'Cliquez sur ce bouton pour démarrer le transfert',
+    multiple: true,
+    position: 'right',
+    theme: 'tooltipster-noir',
+    trigger: tolltip_trigger
+  });
 });
 
 

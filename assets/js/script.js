@@ -119,44 +119,6 @@ $(document).ready(function() {
       alert("Your browser doesnt support FileReader object");
     }
   };
-
-  $('#dropbox').tooltipster({
-    animation: 'fall',
-    content: 'Glissez déposez vos fichiers',
-    multiple: true,
-    position: 'right',
-    theme: 'tooltipster-light'
-  });
-
-  $('#from_email').tooltipster({
-    animation: 'grow',
-    content: 'Ajouer votre   adresse email ici',
-    multiple: true,
-    position: 'right',
-    theme: 'tooltipster-light'
-  });
-
-  $('#to_email').tooltipster({
-    animation: 'grow',
-    content: 'Ajouer les adresses email des destinataires',
-    multiple: true,
-    position: 'left',
-    theme: 'tooltipster-shadow'
-  });
-  $('#inputMessage').tooltipster({
-    animation: 'grow',
-    content: 'Joignez un message à votre transfert',
-    multiple: true,
-    position: 'left',
-    theme: 'tooltipster-shadow'
-  });
-  $('.confirm_btn').tooltipster({
-    animation: 'grow',
-    content: 'Cliquez sur ce bouton pour démarrer le transfert',
-    multiple: true,
-    position: 'right',
-    theme: 'tooltipster-noir'
-  });
 });
 
 function remove_item(db_id) {

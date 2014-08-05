@@ -10,7 +10,7 @@ require_once 'header.php';
 <script type="text/javascript" src="assets/js/jquery.jgfeed.js"></script>
 <script type="text/javascript" src="assets/js/prettify.js"></script>
 <script type="text/javascript" src="assets/js/lang-css.js"></script>
-<script type="text/javascript" src="assets/js/jquery.tooltipster.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.tooltipster.js"></script>
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <script src="./assets/js/script.js"></script>
 <div class="main" id='fileuploadpage'>
@@ -53,7 +53,8 @@ require_once 'header.php';
                 <input type="password" class="form-control" id='inputFilePassword' name='filepassword' />
               </div>
               <div class="form-group confirm_btn">
-                <button type="submit" ><?php _e('Send the file'); ?></button>
+                <button id="confirm_btn" type="submit" ><?php _e('Send the file'); ?></button>
+                <span class='site_help'></span>
                 <span class='file_protect'></span>
               </div>
             </div>

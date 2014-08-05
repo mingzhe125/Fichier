@@ -180,9 +180,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 					}
 				}
 				else if (self.options.trigger == 'click') {
-					
 					// note : for touch devices, we do not bind on touchstart, we only rely on the emulated clicks (triggered by taps)
 					self.$elProxy.on('click.'+ self.namespace, function() {
+						if (!deviceIsPureTouch() || self.options.touchDevices) {
+							self._show();
+						}
+					});
+				}
+				else if (self.options.trigger == 'click_help') {
+					// note : for touch devices, we do not bind on touchstart, we only rely on the emulated clicks (triggered by taps)
+					self.$elProxy.on('click_help.'+ self.namespace, function() {
 						if (!deviceIsPureTouch() || self.options.touchDevices) {
 							self._show();
 						}
@@ -202,7 +209,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 					self.timerShow = setTimeout(function(){
 						
 						// for hover trigger, we check if the mouse is still over the proxy, otherwise we do not show anything
-						if (self.options.trigger == 'click' || (self.options.trigger == 'hover' && self.mouseIsOverProxy)) {
+						if (self.options.trigger == 'click' || self.options.trigger == 'click_help' || (self.options.trigger == 'hover' && self.mouseIsOverProxy)) {
 							self._showNow();
 						}
 					}, self.options.delay);
@@ -408,6 +415,24 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 							}
 							// here we'll set the same bindings for both clicks and touch on the body to hide the tooltip
 							else if(self.options.trigger == 'click'){
+								
+								// use a timeout to prevent immediate closing if the method was called on a click event and if options.delay == 0 (because of bubbling)
+								setTimeout(function() {
+									$('body').on('click.'+ self.namespace +' touchstart.'+ self.namespace, function() {
+										self.hide();
+									});
+								}, 0);
+								
+								// if interactive, we'll stop the events that were emitted from inside the tooltip to stop autoClosing
+								if (self.options.interactive) {
+									
+									// note : the touch events will just not be used if the plugin is not enabled on touch devices
+									self.$tooltip.on('click.'+ self.namespace +' touchstart.'+ self.namespace, function(event) {
+										event.stopPropagation();
+									});
+								}
+							}
+							else if(self.options.trigger == 'click_help'){
 								
 								// use a timeout to prevent immediate closing if the method was called on a click event and if options.delay == 0 (because of bubbling)
 								setTimeout(function() {
