@@ -134,12 +134,12 @@ $(document).ready(function() {
             $('.file_' + current_uploading_file + ' .file_action').html('<a href="javascript:void(0);" class="delete" onClick="remove_item(\'' + db_id + '\')">Remove</a>');
             $('.file_' + current_uploading_file).attr('id', 'file_' + db_id);
             $('.file_' + current_uploading_file + ' .upload_status').css('background', 'url("' + site_url + '/assets/img/icon_checked.jpg") no-repeat center center');
-            $('.file_' + current_uploading_file).append('<input type="hidden" name="uploaded_files[]" value="' + db_id + '" />');
+            $('.file_' + current_uploading_file).append('<input type="hidden" name="uploaded_files[]" value="' + db_id + '" /><input type="hidden" name=uploaded_file_size[' + db_id + ']" value="' + sizeStructure.BytesToStructuredString(file.size) + '" />');
             uploadingSize += file.size;
             preloaded += file.size;
             current_uploading_file++;
             if (current_uploading_file < uploading_files.length) {
-              $('.upload-progress .current_item').html(current_uploading_file + 1 - removed_files);
+              $('.upload-progress .current_item').html(current_uploading_file - removed_files);
               uploadFile(uploading_files[current_uploading_file]);
             }
             $('#dropbox').trigger('progress_end');
@@ -196,7 +196,7 @@ function remove_item(db_id) {
 
 function uploadThrough() {
   if (current_uploading_file >= uploading_files.length) {
-    $('.upload-progress .current_item').html(current_uploading_file + 1 - removed_files);
+    $('.upload-progress .current_item').html(current_uploading_file - removed_files);
     UploadSpeed();//flush
     clearInterval(hUploadSpeed);
     xhr = null;
@@ -207,6 +207,9 @@ function uploadThrough() {
 function UploadSpeed() {
   //speed
   speed = uploaded - prevUpload;
+  if (speed === 0) {
+    return false;
+  }
   prevUpload = uploaded;
   //Calculating ETR
   remainingBytes = total - uploaded;

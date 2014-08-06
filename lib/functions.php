@@ -54,48 +54,64 @@ if (isset($_GET['method'])) {
       $mail = new Mail();
       $mail->ContentType = 'text/html';
 
-      $mail->setMailFrom($_REQUEST['email']);
+      $mail->setMailFrom($_REQUEST['email'], $_REQUEST['username']);
       $mail->setMailTo(TO_EMAIL);
       $mail->setMailTitle('Fichier Web Site');
       $mail->setMailContent($emailContent);
-      @$mail->sendToMail();
+      $mail->sendToMail();
 
-      $success_message = 'Email has been sent successfully!';
+      $success_message = _t('Email has been sent successfully!');
     }
   } else if ($_GET['method'] == 'attach') {
     if (empty($_SESSION['captcha']) || strtolower(trim($_REQUEST['captcha'])) != $_SESSION['captcha']) {
-      $error_message = "Invalid captcha";
+      $error_message = _t("Invalid captcha");
     } else {
       require_once(dirname(__FILE__) . '/mail.php');
-      $emailContent = '<p>' . $_REQUEST['message'] . '</p>';
+      $emailContent = '<h3>' . _t('Hello there') . ', </h3>'
+        . '<h4>' . _t('You received an email') . ': "' . $_REQUEST['from_email'] . '"</h4>'
+        . '<h4>' . _t('Here is the message') . ' : ' . $_REQUEST['message'] . '</h4>';
       if (isset($_REQUEST['uploaded_files']) && !empty($_REQUEST['uploaded_files'])) {
+        $emailContent .= '<h4>' . _t('Here is(are) the file(s) available for download') . ':</h4>'
+          . '<table>';
         foreach ($_REQUEST['uploaded_files'] as $file_item) {
           $file_info = $my_db->select('fichier_files')
             ->fields(array('title', 'file_name'))
             ->where('id', $file_item)
             ->run()
             ->fetchAssoc();
-          $emailContent .= '<p><a href="' . $site_url . '/lib/download.php?file=' . $file_item . '">www.creationdesite.net/~dev8/fichier/lib/download.php?file=' . $file_item . '</a></p>';
+          $emailContent .= '<tr><td style = "border-top:1px solid #eee;"><a href = "' . $site_url . '/lib/download.php?file=' . $file_item . '">' . $file_info['file_name'] . '</a></td>'
+            . '<td>' . $_REQUEST['uploaded_file_size'][$file_item] . '</td></tr>';
           $update_fiels = array('active' => 'A');
           if (isset($_REQUEST['filepassword']) && $_REQUEST['filepassword'] != '') {
             $update_fiels['password'] = md5($_REQUEST['filepassword']);
           }
           $my_db->update('fichier_files', $update_fiels)->where('id', $file_item)->run();
         }
+        $emailContent .='</table>';
       }
 
-      $emailContent .= '<p><strong>Password : </strong> ' . $_REQUEST['filepassword'] . '</p>';
+      if (isset($_REQUEST['filepassword']) && $_REQUEST['filepassword'] != '') {
+        $emailContent .= '<h3><strong>' . _t('Password') . ' : </strong> ' . $_REQUEST['filepassword'] . '</h3>';
+      }
+
+      $emailContent .= _t('<h3>"By clicking on the file you download the corresponding file"</h3>'
+        . '<h3>Best regards, '
+        . 'Fichier.ch <br/>
+          Team <br/><br/>
+          Service for sending free file!<br/>
+          <a href = "http://www.creationdesite.net/~dev8/fichier/">www.fichier.ch</a>'
+        . '</h3>');
 
       $mail = new Mail();
       $mail->ContentType = 'text/html';
 
-      $mail->setMailFrom($_REQUEST['from_email'], '');
+      $mail->setMailFrom($_REQUEST['from_email'], $_REQUEST['from_email']);
       $mail->setMailTo($_REQUEST['to_email']);
       $mail->setMailTitle('Fichier Web Site');
       $mail->setMailContent('<html><head></head><body>' . $emailContent . '</body></html>');
-      @$mail->sendToMail();
+      $mail->sendToMail();
 
-      $success_message = 'Email has been sent successfully!';
+      $success_message = _t('Your email was sent');
     }
   }
 }
