@@ -1,3 +1,14 @@
+var current_uploading_file = 0;
+var removed_files = 0;
+var uploading_files = [];
+var timeStructure = new TimeStructure();
+var sizeStructure = new SizeStructure();
+var totalSize = 0;
+var uploadingSize = 0;
+
+var xhr, hUploadSpeed;
+var uploaded = 0, prevUpload = 0, speed = 0, total = 0, preloaded = 0, remainingBytes = 0, timeRemaining = 0;
+
 $(document).ready(function() {
   var dropbox;
 
@@ -35,34 +46,63 @@ $(document).ready(function() {
   }
 
   handleFiles = function(files, e) {
-    // Traverse throught all files and check if uploaded file type is image	
     var imageType = /(image|pdf).*/;
-    var file = files[0];
+    uploaded = 0, prevUpload = 0, speed = 0, total = 0, preloaded = 0, remainingBytes = 0, timeRemaining = 0;
+    for (var i = 0; i < files.length; i++) {
+      var file_item = files[i];
+      // check file type
+      if (!file_item.type.match(imageType)) {
+        alert("File \"" + file_item.name + "\" is not a valid image or pdf file, Are you trying to screw me :( :( ");
+        continue;
+      }
 
-    // check file type
-    if (!file.type.match(imageType)) {
-      alert("File \"" + file.name + "\" is not a valid image file, Are you trying to screw me :( :( ");
-      return false;
+      if (parseInt(file_item.size / 1024) > 10240) {
+        alert("File \"" + file_item.name + "\" is too big. I am using shared server :P");
+        continue;
+      }
+
+      var file_uid = uid();
+      file_item.uid = file_uid;
+      uploading_files.push(file_item);
+      total += file_item.size;
+      totalSize += file_item.size;
+
+      $('.uploaded_files').append(
+              '<div class="file-item file_' + file_uid + '">' +
+              ' <ul class="uploaded_file_item">' +
+              '   <li class="number">' + (file_uid + 1 - removed_files) + '</li>' +
+              '   <li class="file_name">' + file_item.name + '</li>' +
+              '   <li class="file_size">' + sizeStructure.BytesToStructuredString(file_item.size) + '</li>' +
+              '   <li class="upload_progress"></li>' +
+              '   <li class="upload_status"></li>' +
+              '   <li class="file_action"></li>' +
+              ' </ul>' +
+              '</div>'
+              );
     }
-    // check file size
-    if (parseInt(file.size / 1024) > 10240) {
-      alert("File \"" + file.name + "\" is too big. I am using shared server :P");
-      return false;
-    }
 
-    var info = '<div class="preview active-win"><div class="progress-holder"><span id="progress"></span></div><span class="percents"></span>';
+    var info = '<ul class="preview active-win">\n\
+                  <li class="total_files">Deposited Files : <span class="current_item">' + (current_uploading_file + 1 - removed_files) + '</span>/<span class="total_item">' + (uploading_files.length - removed_files) + '</span></li>\n\
+                  <li class="progress-holder">\n\
+                    <span id="progress"></span>\n\
+                  </li>\n\
+                  <li class="percents"></li>\n\
+                  <li class="total_size">' + sizeStructure.BytesToStructuredString(totalSize) + '</li>\n\
+                </ul>\n\
+                <p id="speed_any"></p>';
 
-    $(".upload-progress").show("slow", function() {
+    $(".upload-progress").show('normal', function() {
       $(".upload-progress").html(info);
-      uploadFile(file);
+      hUploadSpeed = setInterval(UploadSpeed, 1000); //per seconds
+      uploadFile(uploading_files[current_uploading_file]);
     });
-
   };
 
   uploadFile = function(file) {
     // check if browser supports file reader object 
     if (typeof FileReader !== "undefined") {
-      //alert("uploading "+file.name);  
+
+      $('.file_' + current_uploading_file + ' .upload_status').css('background', 'url("' + site_url + '/assets/img/loading2.gif") no-repeat center center');
       reader = new FileReader();
       reader.onload = function(e) {
       };
@@ -73,33 +113,39 @@ $(document).ready(function() {
 
       xhr.upload.addEventListener("progress", function(event) {
         if (event.lengthComputable) {
-          $("#progress").css("width", (event.loaded / event.total) * 100 + "%");
-          $(".percents").html(" " + ((event.loaded / event.total) * 100).toFixed() + "%");
-          $(".up-done").html((parseInt(event.loaded / 1024)).toFixed(0));
+          uploaded = preloaded + event.loaded;
+          $("#progress").css("width", ((uploadingSize + event.loaded) / totalSize) * 100 + "%");
+          $(".percents").html(" " + (((uploadingSize + event.loaded) / totalSize) * 100).toFixed() + "%");
+          $(".up-done").html((parseInt((uploadingSize + event.loaded) / 1024)).toFixed(0));
+
+          $('.file_' + current_uploading_file + ' .upload_progress').html(" " + ((event.loaded / event.total) * 100).toFixed() + "%");
         }
         else {
           alert("Failed to compute file upload length");
         }
       }, false);
+      xhr.addEventListener('load', uploadThrough, false);//EventListener for completed upload
 
       xhr.onreadystatechange = function(oEvent) {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
             db_id = xhr.responseText;
-            $("#progress").css("width", "100%");
-            $(".percents").html("100%");
-            $(".up-done").html((parseInt(file.size / 1024)).toFixed(0));
-            $('.upload-progress').fadeOut('slow', function() {
-              $("#progress").css('width', ' 0%');
-              $(".percents").html("0%");
-              var uploaded_file = $('#fileElem').val().split('\\');
-              $('.uploaded_files').append('<div class="file-item" id="file_' + db_id + '">' + uploaded_file[uploaded_file.length - 1] + '<a href="javascript:void(0);" class="delete" onClick="remove_item(\'' + db_id + '\')"><sup>x</sup></a><input type="hidden" name="uploaded_files[]" value="' + db_id + '" /></div>');
-              $('.upload-progress').html('');
-              $('#dropbox').trigger('progress_end');
-              $('.frm_contact').data('bootstrapValidator')
-                      .updateStatus('dropbox', 'NOT_VALIDATED')
-                      .validateField('dropbox');
-            });
+
+            $('.file_' + current_uploading_file + ' .file_action').html('<a href="javascript:void(0);" class="delete" onClick="remove_item(\'' + db_id + '\')">Remove</a>');
+            $('.file_' + current_uploading_file).attr('id', 'file_' + db_id);
+            $('.file_' + current_uploading_file + ' .upload_status').css('background', 'url("' + site_url + '/assets/img/icon_checked.jpg") no-repeat center center');
+            $('.file_' + current_uploading_file).append('<input type="hidden" name="uploaded_files[]" value="' + db_id + '" />');
+            uploadingSize += file.size;
+            preloaded += file.size;
+            current_uploading_file++;
+            if (current_uploading_file < uploading_files.length) {
+              $('.upload-progress .current_item').html(current_uploading_file + 1 - removed_files);
+              uploadFile(uploading_files[current_uploading_file]);
+            }
+            $('#dropbox').trigger('progress_end');
+            $('.frm_contact').data('bootstrapValidator')
+                    .updateStatus('dropbox', 'NOT_VALIDATED')
+                    .validateField('dropbox');
           } else {
             alert("Error" + xhr.statusText);
           }
@@ -127,7 +173,52 @@ function remove_item(db_id) {
     url: "lib/ajax_fileupload.php",
     data: {method: 'delete', id: db_id},
     success: function() {
-      $('#file_' + db_id).hide('slow');
+      $('#file_' + db_id).hide('slow', function() {
+        var matches = $('#file_' + db_id).prop('className').match(/\bfile_(\d+)\b/i);
+        var theNumber = matches[1];
+        $('#file_' + db_id).remove();
+        $('.upload-progress .current_item').html($('.upload-progress .current_item').html() * 1 - 1);
+        $('.upload-progress .total_item').html($('.upload-progress .total_item').html() * 1 - 1);
+
+        totalSize = totalSize - uploading_files[theNumber].size;
+        uploadingSize = uploadingSize - uploading_files[theNumber].size;
+        removed_files++;
+
+        $('.upload-progress .total_size').html(sizeStructure.BytesToStructuredString(totalSize));
+
+        $('.uploaded_files .file-item').each(function(index) {
+          $(this).find('.uploaded_file_item .number').eq(0).html(index + 1);
+        });
+      });
     }
   });
 }
+
+function uploadThrough() {
+  if (current_uploading_file >= uploading_files.length) {
+    $('.upload-progress .current_item').html(current_uploading_file + 1 - removed_files);
+    UploadSpeed();//flush
+    clearInterval(hUploadSpeed);
+    xhr = null;
+    $('#speed_any').html('Upload Completed!');
+  }
+}
+
+function UploadSpeed() {
+  //speed
+  speed = uploaded - prevUpload;
+  prevUpload = uploaded;
+  //Calculating ETR
+  remainingBytes = total - uploaded;
+  timeRemaining = remainingBytes / speed;
+  $('#speed_any').html('Time Left : ' + timeStructure.SecondsToStructuredString(timeRemaining) + ' (' + sizeStructure.SpeedToStructuredString(speed) + ')');
+}
+
+var uid = (function() {
+  var id = 0;
+  return function() {
+    if (arguments[0] === 0)
+      id = 0;
+    return id++;
+  };
+})();

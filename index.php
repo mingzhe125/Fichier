@@ -11,7 +11,8 @@ require_once 'header.php';
 <script type="text/javascript" src="assets/js/prettify.js"></script>
 <script type="text/javascript" src="assets/js/lang-css.js"></script>
 <script type="text/javascript" src="assets/js/jquery.tooltipster.js"></script>
-<!-- Main jumbotron for a primary marketing message or call to action -->
+<script type="text/javascript" src="assets/js/SizeStructure.js"></script>
+<script type="text/javascript" src="assets/js/TimeStructure.js"></script>
 <script src="./assets/js/script.js"></script>
 <div class="main" id='fileuploadpage'>
   <div class="main_top"></div>
@@ -26,7 +27,7 @@ require_once 'header.php';
                 <!--<input id="uploaded_files_list" name="uploaded_files_list" class="uploaded_files_list" value="" />-->
                 <button id='dropbox' data-bv-trigger="progress_end" name="dropbox" type="text" class="dropbox btn btn-default btn-lg btn-block"><span class="glyphicon glyphicon-plus-sign"></span> <?php _e('Your file (s)'); ?></button>
               </div>
-              <input type="file" id="fileElem" multiple="true" accept="image/*" onchange="handleFiles(this.files)">
+              <input type="file" id="fileElem" multiple="true" accept="*" onchange="handleFiles(this.files)">
               <div class="uploaded_files">
               </div>
               <div class="upload-progress"></div>

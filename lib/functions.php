@@ -2,27 +2,27 @@
 
 //error_reporting(~E_ALL);
 
-function my_session_start() {
-  $sn = session_name();
-  if (isset($_COOKIE[$sn])) {
-    $sessid = $_COOKIE[$sn];
-  } else if (isset($_GET[$sn])) {
-    $sessid = $_GET[$sn];
-  } else {
-    return session_start();
-  }
-
-  if (!preg_match('/^[a-zA-Z0-9,\-]{22,40}$/', $sessid)) {
-    return false;
-  }
-  return session_start();
-}
-
-if (!my_session_start()) {
-  session_id(uniqid());
-  session_start();
-  session_regenerate_id();
-}
+session_start();
+//function my_session_start() {
+//  $sn = session_name();
+//  if (isset($_COOKIE[$sn])) {
+//    $sessid = $_COOKIE[$sn];
+//  } else if (isset($_GET[$sn])) {
+//    $sessid = $_GET[$sn];
+//  } else {
+//    return session_start();
+//  }
+//
+//  if (!preg_match('/^[a-zA-Z0-9,\-]{22,40}$/', $sessid)) {
+//    return false;
+//  }
+//  return session_start();
+//}
+//if (!my_session_start()) {
+//  session_id(uniqid());
+//  session_start();
+//  session_regenerate_id();
+//}
 
 require_once dirname(__FILE__) . '/language.php';
 require_once dirname(__FILE__) . '/class.db.php';
@@ -34,7 +34,8 @@ if (isset($_GET['lang']) && $_GET['lang'] != '') {
 
 $language = WLanguage::getInstance()->getLang();
 //$my_db = new db("mysql:host=localhost;dbname=creationdesitenet9", 'dev8', '9fmhd9hjr3ls');
-$site_url = 'http://www.creationdesite.net/~dev8/fichier';
+//$site_url = 'http://www.creationdesite.net/~dev8/fichier';
+$site_url = 'http://127.0.0.7/07_fichier/public_html';
 $my_db = new db("mysql:host=localhost;dbname=2014_07_fichier", 'root', '');
 
 $error_message = '';
@@ -66,7 +67,6 @@ if (isset($_GET['method'])) {
       $error_message = "Invalid captcha";
     } else {
       require_once(dirname(__FILE__) . '/mail.php');
-
       $emailContent = '<p>' . $_REQUEST['message'] . '</p>';
       if (isset($_REQUEST['uploaded_files']) && !empty($_REQUEST['uploaded_files'])) {
         foreach ($_REQUEST['uploaded_files'] as $file_item) {
@@ -89,7 +89,7 @@ if (isset($_GET['method'])) {
       $mail = new Mail();
       $mail->ContentType = 'text/html';
 
-      $mail->setMailFrom($_REQUEST['from_email']);
+      $mail->setMailFrom($_REQUEST['from_email'], '');
       $mail->setMailTo($_REQUEST['to_email']);
       $mail->setMailTitle('Fichier Web Site');
       $mail->setMailContent('<html><head></head><body>' . $emailContent . '</body></html>');
