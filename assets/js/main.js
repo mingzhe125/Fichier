@@ -104,8 +104,58 @@ $(document).ready(function() {
 
   if ($('#dropbox').length > 0) {
     $('#dropbox').on('click', function() {
-      $('#fileElem').trigger('click');
+//      $('#fileElem', $('.frm_contact')).trigger('click');
+      var evt = document.createEvent("HTMLEvents");
+      evt.initEvent("click", true, true);
+      document.getElementById('fileElem').dispatchEvent(evt);
       return false;
+    });
+
+    var tolltip_trigger = 'click_help';
+
+    $('#dropbox').tooltipster({
+      animation: 'grow',
+      content: 'Glissez déposez vos fichiers',
+      multiple: true,
+      position: 'right',
+      theme: 'tooltipster-light',
+      trigger: tolltip_trigger
+    });
+
+    $('#from_email').tooltipster({
+      animation: 'grow',
+      content: 'Ajouer votre   adresse email ici',
+      multiple: true,
+      position: 'right',
+      theme: 'tooltipster-light',
+      trigger: tolltip_trigger
+    });
+
+    $('#to_email').tooltipster({
+      animation: 'grow',
+      content: 'Ajouer les adresses email des destinataires',
+      multiple: true,
+      position: 'left',
+      theme: 'tooltipster-shadow',
+      trigger: tolltip_trigger
+    });
+
+    $('#inputMessage').tooltipster({
+      animation: 'grow',
+      content: 'Joignez un message à votre transfert',
+      multiple: true,
+      position: 'left',
+      theme: 'tooltipster-shadow',
+      trigger: tolltip_trigger
+    });
+
+    $('.confirm_btn').tooltipster({
+      animation: 'grow',
+      content: 'Cliquez sur ce bouton pour démarrer le transfert',
+      multiple: true,
+      position: 'right',
+      theme: 'tooltipster-noir',
+      trigger: tolltip_trigger
     });
   }
 
@@ -147,8 +197,6 @@ $(document).ready(function() {
     });
   }
 
-  var tolltip_trigger = 'click_help';
-
   if ($('.site_help').length > 0) {
     $('.site_help').click(function() {
       $('#dropbox').trigger(tolltip_trigger);
@@ -159,52 +207,7 @@ $(document).ready(function() {
     });
   }
 
-  $('#dropbox').tooltipster({
-    animation: 'grow',
-    content: 'Glissez déposez vos fichiers',
-    multiple: true,
-    position: 'right',
-    theme: 'tooltipster-light',
-    trigger: tolltip_trigger
-  });
-
-  $('#from_email').tooltipster({
-    animation: 'grow',
-    content: 'Ajouer votre   adresse email ici',
-    multiple: true,
-    position: 'right',
-    theme: 'tooltipster-light',
-    trigger: tolltip_trigger
-  });
-
-  $('#to_email').tooltipster({
-    animation: 'grow',
-    content: 'Ajouer les adresses email des destinataires',
-    multiple: true,
-    position: 'left',
-    theme: 'tooltipster-shadow',
-    trigger: tolltip_trigger
-  });
-
-  $('#inputMessage').tooltipster({
-    animation: 'grow',
-    content: 'Joignez un message à votre transfert',
-    multiple: true,
-    position: 'left',
-    theme: 'tooltipster-shadow',
-    trigger: tolltip_trigger
-  });
-
-  $('.confirm_btn').tooltipster({
-    animation: 'grow',
-    content: 'Cliquez sur ce bouton pour démarrer le transfert',
-    multiple: true,
-    position: 'right',
-    theme: 'tooltipster-noir',
-    trigger: tolltip_trigger
-  });
 });
-
 
 function resizeBody() {
   var screen_height = $(window).height();

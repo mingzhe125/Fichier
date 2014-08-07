@@ -49,6 +49,7 @@ if (isset($_GET['method'])) {
       require_once(dirname(__FILE__) . '/mail.php');
 
       define('TO_EMAIL', 'vincent@enoxone.ch');
+//      define('TO_EMAIL', 'changhyang928@gmail.com');
       $emailContent = $_REQUEST['message'];
 
       $mail = new Mail();
@@ -80,7 +81,7 @@ if (isset($_GET['method'])) {
             ->run()
             ->fetchAssoc();
           $emailContent .= '<tr><td style = "border-top:1px solid #eee;"><a href = "' . $site_url . '/lib/download.php?file=' . $file_item . '">' . $file_info['file_name'] . '</a></td>'
-            . '<td>' . $_REQUEST['uploaded_file_size'][$file_item] . '</td></tr>';
+            . '<td style = "border-top:1px solid #eee;">' . $_REQUEST['uploaded_file_size'][$file_item] . '</td></tr>';
           $update_fiels = array('active' => 'A');
           if (isset($_REQUEST['filepassword']) && $_REQUEST['filepassword'] != '') {
             $update_fiels['password'] = md5($_REQUEST['filepassword']);

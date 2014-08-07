@@ -34,5 +34,9 @@
   "Here is the message": "Voici le message",
   "Here is(are) the file(s) available for download": "Voici le(s) Fichier(s) disponible(s) au téléchargement",
   "<h3>\"By clicking on the file you download the corresponding file\"<\/h3><h3>Best regards, Fichier.ch <br\/>\r\n          Team <br\/><br\/>\r\n          Service for sending free file!<br\/>\r\n          <a href = \"http:\/\/www.creationdesite.net\/~dev8\/fichier\/\">www.fichier.ch<\/a><\/h3>": "<h3>\"En cliquant sur le fichier vous téléchargerez le fichier correspondant\"<\/h3><h3>Cordialement, Fichier.ch <br\/>\r\n          Team <br\/><br\/>\r\n          Service d’envoi de fichiers gratuit!<br\/>\r\n          <a href = \"http:\/\/www.creationdesite.net\/~dev8\/fichier\/\">www.fichier.ch<\/a><\/h3>",
-  "Password": "Votre mot de passe"
+  "Password": "Votre mot de passe",
+  "Your email was sent": "Votre email a été envoyé",
+    "Email has been sent successfully!": "Email has been sent successfully!",
+    "<h3>\"By clicking on the file you download the corresponding file\"<\/h3><h3>Best regards, Fichier.ch <br\/>\n          Team <br\/><br\/>\n          Service for sending free file!<br\/>\n          <a href = \"http:\/\/www.creationdesite.net\/~dev8\/fichier\/\">www.fichier.ch<\/a><\/h3>": "<h3>\"By clicking on the file you download the corresponding file\"<\/h3><h3>Best regards, Fichier.ch <br\/>\n          Team <br\/><br\/>\n          Service for sending free file!<br\/>\n          <a href = \"http:\/\/www.creationdesite.net\/~dev8\/fichier\/\">www.fichier.ch<\/a><\/h3>",
+    "Invalid captcha": "Invalid captcha"
 }

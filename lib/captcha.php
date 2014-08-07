@@ -18,7 +18,7 @@ $captcha = new SimpleCaptcha();
 // OPTIONAL Change configuration...
 //$captcha->wordsFile = 'words/es.php';
 //$captcha->session_var = 'secretword';
-//$captcha->imageFormat = 'png';
+$captcha->imageFormat = 'png';
 //$captcha->lineWidth = 3;
 //$captcha->scale = 3;
 //$captcha->blur = true;

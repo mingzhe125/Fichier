@@ -18,7 +18,7 @@ require_once 'header.php';
   <div class="main_top"></div>
   <section class="container-fluid">
     <div class="container">
-      <div class="main-content col-lg-4 col-md-4 col-lg-offset-4 col-md-offset-4">
+      <div class="main-content col-lg-6 col-md-6 col-sm-8 col-xs-12 col-lg-offset-3 col-md-offset-3 col-sm-offset-2">
         <div class="inner-content">
           <div class="content-header"><p><?php _e('Files up to 5GB'); ?></p></div>
           <form class='frm_contact' action="<?php echo add_query_arg('method', 'attach'); ?>" method="post">
@@ -59,20 +59,21 @@ require_once 'header.php';
                 <span class='file_protect'></span>
               </div>
             </div>
+            <div class="content-body col-lg-12" style="min-height: 0px;padding: 0px 20px;font-size: 14px;">
+              <?php if (!empty($error_message)) : ?>
+                <div class="alert alert-warning">
+                  <a href="#" class="close" data-dismiss="alert">&times;</a>
+                  <?php echo $error_message; ?>
+                </div> 
+              <?php endif; ?>
+              <?php if (!empty($success_message)) : ?>
+                <div class="alert alert-success">
+                  <a href="#" class="close" data-dismiss="alert">&times;</a>
+                  <?php echo $success_message; ?>
+                </div> 
+              <?php endif; ?>
+            </div>
           </form>
-          <br/>
-          <?php if (!empty($error_message)) : ?>
-            <div class="alert alert-warning">
-              <a href="#" class="close" data-dismiss="alert">&times;</a>
-              <?php echo $error_message; ?>
-            </div> 
-          <?php endif; ?>
-          <?php if (!empty($success_message)) : ?>
-            <div class="alert alert-success">
-              <a href="#" class="close" data-dismiss="alert">&times;</a>
-              <?php echo $success_message; ?>
-            </div> 
-          <?php endif; ?>
         </div>
       </div>
     </div>

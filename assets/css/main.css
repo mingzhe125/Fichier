@@ -461,10 +461,61 @@ body{
   .tooltipster-base{
     display: none!important;
   }
+  .main-content{
+    margin-top: 80px;
+    margin-bottom: 20px;
+    float: left;
+  }
+}
+@media (max-width: 767px) {
+  .social-icons{
+    display: none;
+  }
+  .main section.container-fluid{
+    background: none!important;
+    padding-bottom: 150px!important;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .container{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .tooltipster-base{
+    display: none!important;
+  }
+  .main-content{
+    margin-top: 80px;
+    margin-bottom: 20px;
+    float: left;
+  }
+  #fileuploadpage .uploaded_files ul li.number{
+    width: 4%;
+  }
+  #fileuploadpage .uploaded_files ul li.file_name{
+    width: 40%;
+  }
+  #fileuploadpage .uploaded_files ul li.file_size{
+    width: 20%;
+  }
+  #fileuploadpage .uploaded_files ul li.upload_progress{
+    width: 13%;
+  }
+  #fileuploadpage .uploaded_files ul li.upload_status{
+    width: 10%;
+    background-size: 18px!important;
+  }
+  #fileuploadpage .uploaded_files ul li.file_action{
+    width: 13%;
+  }
 }
 
 #fileElem{
-  display: none;
+  z-index: 0;
+  margin-top: -56px;
+  height: 39px;
+  margin-bottom: 10px;
+  /*display: none;*/
 }
 
 .social-icons{

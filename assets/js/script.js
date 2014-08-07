@@ -10,6 +10,10 @@ var xhr, hUploadSpeed;
 var uploaded = 0, prevUpload = 0, speed = 0, total = 0, preloaded = 0, remainingBytes = 0, timeRemaining = 0;
 
 $(document).ready(function() {
+
+  if (typeof FileReader === "undefined") {
+    $('#fileElem').attr('multiple', false);
+  }
   var dropbox;
 
   dropbox = document.getElementById("dropbox");
@@ -101,69 +105,67 @@ $(document).ready(function() {
   uploadFile = function(file) {
     // check if browser supports file reader object 
     if (typeof FileReader !== "undefined") {
-
-      $('.file_' + current_uploading_file + ' .upload_status').css('background', 'url("' + site_url + '/assets/img/loading2.gif") no-repeat center center');
       reader = new FileReader();
       reader.onload = function(e) {
       };
       reader.readAsDataURL(file);
-
-      xhr = new XMLHttpRequest();
-      xhr.open("post", "lib/ajax_fileupload.php?filename=" + file.name, true);
-
-      xhr.upload.addEventListener("progress", function(event) {
-        if (event.lengthComputable) {
-          uploaded = preloaded + event.loaded;
-          $("#progress").css("width", ((uploadingSize + event.loaded) / totalSize) * 100 + "%");
-          $(".percents").html(" " + (((uploadingSize + event.loaded) / totalSize) * 100).toFixed() + "%");
-          $(".up-done").html((parseInt((uploadingSize + event.loaded) / 1024)).toFixed(0));
-
-          $('.file_' + current_uploading_file + ' .upload_progress').html(" " + ((event.loaded / event.total) * 100).toFixed() + "%");
-        }
-        else {
-          alert("Failed to compute file upload length");
-        }
-      }, false);
-      xhr.addEventListener('load', uploadThrough, false);//EventListener for completed upload
-
-      xhr.onreadystatechange = function(oEvent) {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            db_id = xhr.responseText;
-
-            $('.file_' + current_uploading_file + ' .file_action').html('<a href="javascript:void(0);" class="delete" onClick="remove_item(\'' + db_id + '\')">Remove</a>');
-            $('.file_' + current_uploading_file).attr('id', 'file_' + db_id);
-            $('.file_' + current_uploading_file + ' .upload_status').css('background', 'url("' + site_url + '/assets/img/icon_checked.jpg") no-repeat center center');
-            $('.file_' + current_uploading_file).append('<input type="hidden" name="uploaded_files[]" value="' + db_id + '" /><input type="hidden" name=uploaded_file_size[' + db_id + ']" value="' + sizeStructure.BytesToStructuredString(file.size) + '" />');
-            uploadingSize += file.size;
-            preloaded += file.size;
-            current_uploading_file++;
-            if (current_uploading_file < uploading_files.length) {
-              $('.upload-progress .current_item').html(current_uploading_file - removed_files);
-              uploadFile(uploading_files[current_uploading_file]);
-            }
-            $('#dropbox').trigger('progress_end');
-            $('.frm_contact').data('bootstrapValidator')
-                    .updateStatus('dropbox', 'NOT_VALIDATED')
-                    .validateField('dropbox');
-          } else {
-            alert("Error" + xhr.statusText);
-          }
-        }
-      };
-
-      // Set headers
-      xhr.setRequestHeader("Content-Type", "multipart/form-data");
-      xhr.setRequestHeader("X-File-Name", file.fileName);
-      xhr.setRequestHeader("X-File-Size", file.fileSize);
-      xhr.setRequestHeader("X-File-Type", file.type);
-
-      // Send the file (doh)
-      xhr.send(file);
-
     } else {
-      alert("Your browser doesnt support FileReader object");
+      $('#fileElem').attr('multiple', false);
     }
+
+    $('.file_' + current_uploading_file + ' .upload_status').css('background', 'url("' + site_url + '/assets/img/loading2.gif") no-repeat center center');
+    xhr = new XMLHttpRequest();
+    xhr.open("post", "lib/ajax_fileupload.php?filename=" + file.name, true);
+
+    xhr.upload.addEventListener("progress", function(event) {
+      if (event.lengthComputable) {
+        uploaded = preloaded + event.loaded;
+        $("#progress").css("width", ((uploadingSize + event.loaded) / totalSize) * 100 + "%");
+        $(".percents").html(" " + (((uploadingSize + event.loaded) / totalSize) * 100).toFixed() + "%");
+        $(".up-done").html((parseInt((uploadingSize + event.loaded) / 1024)).toFixed(0));
+
+        $('.file_' + current_uploading_file + ' .upload_progress').html(" " + ((event.loaded / event.total) * 100).toFixed() + "%");
+      }
+      else {
+        alert("Failed to compute file upload length");
+      }
+    }, false);
+    xhr.addEventListener('load', uploadThrough, false);//EventListener for completed upload
+
+    xhr.onreadystatechange = function(oEvent) {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          db_id = xhr.responseText;
+
+          $('.file_' + current_uploading_file + ' .file_action').html('<a href="javascript:void(0);" class="delete" onClick="remove_item(\'' + db_id + '\')">Remove</a>');
+          $('.file_' + current_uploading_file).attr('id', 'file_' + db_id);
+          $('.file_' + current_uploading_file + ' .upload_status').css('background', 'url("' + site_url + '/assets/img/icon_checked.jpg") no-repeat center center');
+          $('.file_' + current_uploading_file).append('<input type="hidden" name="uploaded_files[]" value="' + db_id + '" /><input type="hidden" name=uploaded_file_size[' + db_id + ']" value="' + sizeStructure.BytesToStructuredString(file.size) + '" />');
+          uploadingSize += file.size;
+          preloaded += file.size;
+          current_uploading_file++;
+          if (current_uploading_file < uploading_files.length) {
+            $('.upload-progress .current_item').html(current_uploading_file - removed_files);
+            uploadFile(uploading_files[current_uploading_file]);
+          }
+          $('#dropbox').trigger('progress_end');
+          $('.frm_contact').data('bootstrapValidator')
+                  .updateStatus('dropbox', 'NOT_VALIDATED')
+                  .validateField('dropbox');
+        } else {
+          alert("Error" + xhr.statusText);
+        }
+      }
+    };
+
+    // Set headers
+    xhr.setRequestHeader("Content-Type", "multipart/form-data");
+    xhr.setRequestHeader("X-File-Name", file.fileName);
+    xhr.setRequestHeader("X-File-Size", file.fileSize);
+    xhr.setRequestHeader("X-File-Type", file.type);
+
+    // Send the file (doh)
+    xhr.send(file);
   };
 });
 
