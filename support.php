@@ -11,10 +11,10 @@ require_once 'header.php';
           <div class="content-header"><p><?php _e('Legal stuff'); ?></p></div>
           <div class="content-body col-lg-12 col-md-12 col-sm-12">
             <div class="col-lg-6 col-md-12 file-description">
-              <p><?php _e('Here\'s all the legal mumbo jumbo. It’s the stuff that lawyers dream of, but that the average user seldom reads, let alone understands. Feel free to read them but they basically state that we promise to never screw you over, sell your info or do anything else to compromise our integrity. In turn, we expect you to play fair and stick to our terms.'); ?></p>	
+              <p><?php _e('Here\'s all the legal mumbo jumbo. It’s the stuff that lawyers dream of, but that the average user seldom reads, let alone understands. Feel free to read them but they basically state that we promise to never screw you over, sell your info or do anything else to compromise our integrity. In turn, we expect you to play fair and stick to our terms.'); ?></p>
             </div>
             <div class="col-lg-6 file-items">
-              <p><?php _e('Here\'s all the legal mumbo jumbo. It’s the stuff that lawyers dream of, but that the average user seldom reads, let alone understands. Feel free to read them but they basically state that we promise to never screw you over, sell your info or do anything else to compromise our integrity. In turn, we expect you to play fair and stick to our terms.'); ?></p>	
+              <p><?php _e('Here\'s all the legal mumbo jumbo. It’s the stuff that lawyers dream of, but that the average user seldom reads, let alone understands. Feel free to read them but they basically state that we promise to never screw you over, sell your info or do anything else to compromise our integrity. In turn, we expect you to play fair and stick to our terms.'); ?></p>
             </div>
           </div>
         </div>
@@ -23,5 +23,4 @@ require_once 'header.php';
   </section>
   <?php
   require_once 'footer.php';
-  ?>
-
+  

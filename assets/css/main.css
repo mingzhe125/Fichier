@@ -291,7 +291,7 @@ body{
   padding: 0px;
 }
 #fileuploadpage .uploaded_files ul, .upload-progress ul{
-  font-size: 10px;
+  font-size: 14px;
   display: table;
   width: 100%;
   padding: 0px;
@@ -507,6 +507,9 @@ body{
   }
   #fileuploadpage .uploaded_files ul li.file_action{
     width: 13%;
+  }
+  #fileuploadpage .uploaded_files ul, .upload-progress ul{
+    font-size: 10px;
   }
 }
 

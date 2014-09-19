@@ -29,5 +29,20 @@
     "Download File": "Download File",
     "Download file": "Download file",
     "Enter the password to download the file": "Enter the password to download the file",
-    "Download": "Download"
+    "Download": "Download",
+    "This value is not valid": "This value is not valid",
+    "Please uplod the file": "Please uplod the file",
+    "The username is not valid": "The username is not valid",
+    "The username is required and cannot be empty": "The username is required and cannot be empty",
+    "The username must be more than 4 and less than 30 characters long": "The username must be more than 4 and less than 30 characters long",
+    "The username can only consist of alphabetical, number and underscore": "The username can only consist of alphabetical, number and underscore",
+    "The email is required and cannot be empty": "The email is required and cannot be empty",
+    "The input is not a valid email address": "The input is not a valid email address",
+    "The message is required and cannot be empty": "The message is required and cannot be empty",
+    "The captcha is required and cannot be empty": "The captcha is required and cannot be empty",
+    "The captcha must be more than 4 and less than 10 characters long": "The captcha must be more than 4 and less than 10 characters long",
+    "Deposited Files": "Deposited Files",
+    "Remove": "Remove",
+    "Time Left : ": "Time Left : ",
+    "Upload Completed!": "Upload Completed!"
 }

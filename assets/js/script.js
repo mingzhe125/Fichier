@@ -50,18 +50,18 @@ $(document).ready(function() {
   }
 
   handleFiles = function(files, e) {
-    var imageType = /(image|pdf).*/;
+//    var imageType = /(image|pdf).*/;
     uploaded = 0, prevUpload = 0, speed = 0, total = 0, preloaded = 0, remainingBytes = 0, timeRemaining = 0;
     for (var i = 0; i < files.length; i++) {
       var file_item = files[i];
       // check file type
-      if (!file_item.type.match(imageType)) {
-        alert("File \"" + file_item.name + "\" is not a valid image or pdf file, Are you trying to screw me :( :( ");
-        continue;
-      }
+//      if (!file_item.type.match(imageType)) {
+//        alert(_t("File \"") + file_item.name + _t("\" is not a valid image or pdf file, Are you trying to screw me :( :( "));
+//        continue;
+//      }
 
       if (parseInt(file_item.size / 1024) > 10240) {
-        alert("File \"" + file_item.name + "\" is too big. I am using shared server :P");
+        alert(_t("File \"") + file_item.name + _t("\" is too big. I am using shared server :P"));
         continue;
       }
 
@@ -86,7 +86,7 @@ $(document).ready(function() {
     }
 
     var info = '<ul class="preview active-win">\n\
-                  <li class="total_files">Deposited Files : <span class="current_item">' + (current_uploading_file + 1 - removed_files) + '</span>/<span class="total_item">' + (uploading_files.length - removed_files) + '</span></li>\n\
+                  <li class="total_files">' + _t('Deposited Files') + ' : <span class="current_item">' + (current_uploading_file + 1 - removed_files) + '</span>/<span class="total_item">' + (uploading_files.length - removed_files) + '</span></li>\n\
                   <li class="progress-holder">\n\
                     <span id="progress"></span>\n\
                   </li>\n\
@@ -127,7 +127,7 @@ $(document).ready(function() {
         $('.file_' + current_uploading_file + ' .upload_progress').html(" " + ((event.loaded / event.total) * 100).toFixed() + "%");
       }
       else {
-        alert("Failed to compute file upload length");
+        alert(_t("Failed to compute file upload length"));
       }
     }, false);
     xhr.addEventListener('load', uploadThrough, false);//EventListener for completed upload
@@ -137,7 +137,7 @@ $(document).ready(function() {
         if (xhr.status === 200) {
           db_id = xhr.responseText;
 
-          $('.file_' + current_uploading_file + ' .file_action').html('<a href="javascript:void(0);" class="delete" onClick="remove_item(\'' + db_id + '\')">Remove</a>');
+          $('.file_' + current_uploading_file + ' .file_action').html('<a href="javascript:void(0);" class="delete" onClick="remove_item(\'' + db_id + '\')">' + _t('Remove') + '</a>');
           $('.file_' + current_uploading_file).attr('id', 'file_' + db_id);
           $('.file_' + current_uploading_file + ' .upload_status').css('background', 'url("' + site_url + '/assets/img/icon_checked.jpg") no-repeat center center');
           $('.file_' + current_uploading_file).append('<input type="hidden" name="uploaded_files[]" value="' + db_id + '" /><input type="hidden" name=uploaded_file_size[' + db_id + ']" value="' + sizeStructure.BytesToStructuredString(file.size) + '" />');
@@ -202,7 +202,7 @@ function uploadThrough() {
     UploadSpeed();//flush
     clearInterval(hUploadSpeed);
     xhr = null;
-    $('#speed_any').html('Upload Completed!');
+    $('#speed_any').html(_t('Upload Completed!'));
   }
 }
 
@@ -216,7 +216,7 @@ function UploadSpeed() {
   //Calculating ETR
   remainingBytes = total - uploaded;
   timeRemaining = remainingBytes / speed;
-  $('#speed_any').html('Time Left : ' + timeStructure.SecondsToStructuredString(timeRemaining) + ' (' + sizeStructure.SpeedToStructuredString(speed) + ')');
+  $('#speed_any').html(_t('Time Left : ') + timeStructure.SecondsToStructuredString(timeRemaining) + ' (' + sizeStructure.SpeedToStructuredString(speed) + ')');
 }
 
 var uid = (function() {

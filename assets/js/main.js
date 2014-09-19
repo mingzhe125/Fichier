@@ -11,7 +11,7 @@ $(document).ready(function() {
   };
 
   $('.frm_contact').bootstrapValidator({
-    message: 'This value is not valid',
+    message: _t('This value is not valid'),
     feedbackIcons: {
       valid: 'glyphicon glyphicon-ok',
       invalid: 'glyphicon glyphicon-remove',
@@ -20,76 +20,76 @@ $(document).ready(function() {
     fields: {
       dropbox: {
         trigger: 'progress_end',
-        message: 'Please uplod the file',
+        message: _t('Please uplod the file'),
         validators: {
           fileuploadstatus: {
-            message: 'Please uplod the file'
+            message: _t('Please uplod the file')
           }
         }
       },
       username: {
-        message: 'The username is not valid',
+        message: _t('The username is not valid'),
         validators: {
           notEmpty: {
-            message: 'The username is required and cannot be empty'
+            message: _t('The username is required and cannot be empty')
           },
           stringLength: {
             min: 4,
             max: 30,
-            message: 'The username must be more than 4 and less than 30 characters long'
+            message: _t('The username must be more than 4 and less than 30 characters long')
           },
           regexp: {
             regexp: /^[a-zA-Z0-9_ ]+$/,
-            message: 'The username can only consist of alphabetical, number and underscore'
+            message: _t('The username can only consist of alphabetical, number and underscore')
           }
         }
       },
       email: {
         validators: {
           notEmpty: {
-            message: 'The email is required and cannot be empty'
+            message: _t('The email is required and cannot be empty')
           },
           emailAddress: {
-            message: 'The input is not a valid email address'
+            message: _t('The input is not a valid email address')
           }
         }
       },
       to_email: {
         validators: {
           notEmpty: {
-            message: 'The email is required and cannot be empty'
+            message: _t('The email is required and cannot be empty')
           },
           emailAddress: {
-            message: 'The input is not a valid email address'
+            message: _t('The input is not a valid email address')
           }
         }
       },
       from_email: {
         validators: {
           notEmpty: {
-            message: 'The email is required and cannot be empty'
+            message: _t('The email is required and cannot be empty')
           },
           emailAddress: {
-            message: 'The input is not a valid email address'
+            message: _t('The input is not a valid email address')
           }
         }
       },
       message: {
         validators: {
           notEmpty: {
-            message: 'The message is required and cannot be empty'
+            message: _t('The message is required and cannot be empty')
           }
         }
       },
       captcha: {
         validators: {
           notEmpty: {
-            message: 'The captcha is required and cannot be empty'
+            message: _t('The captcha is required and cannot be empty')
           },
           stringLength: {
             min: 4,
             max: 10,
-            message: 'The captcha must be more than 4 and less than 10 characters long'
+            message: _t('The captcha must be more than 4 and less than 10 characters long')
           }
         }
       }
@@ -104,10 +104,13 @@ $(document).ready(function() {
 
   if ($('#dropbox').length > 0) {
     $('#dropbox').on('click', function() {
-//      $('#fileElem', $('.frm_contact')).trigger('click');
-      var evt = document.createEvent("HTMLEvents");
-      evt.initEvent("click", true, true);
-      document.getElementById('fileElem').dispatchEvent(evt);
+      if (navigator.userAgent.search("Firefox") > -1) {
+        $('#fileElem', $('.frm_contact')).trigger('click');
+      } else {
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent("click", true, true);
+        document.getElementById('fileElem').dispatchEvent(evt);
+      }
       return false;
     });
 

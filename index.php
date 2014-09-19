@@ -13,7 +13,7 @@ require_once 'header.php';
 <script type="text/javascript" src="assets/js/jquery.tooltipster.js"></script>
 <script type="text/javascript" src="assets/js/SizeStructure.js"></script>
 <script type="text/javascript" src="assets/js/TimeStructure.js"></script>
-<script src="./assets/js/script.js"></script>
+<script type="text/javascript" src="assets/js/script.js"></script>
 <div class="main" id='fileuploadpage'>
   <div class="main_top"></div>
   <section class="container-fluid">
@@ -64,13 +64,13 @@ require_once 'header.php';
                 <div class="alert alert-warning">
                   <a href="#" class="close" data-dismiss="alert">&times;</a>
                   <?php echo $error_message; ?>
-                </div> 
+                </div>
               <?php endif; ?>
               <?php if (!empty($success_message)) : ?>
                 <div class="alert alert-success">
                   <a href="#" class="close" data-dismiss="alert">&times;</a>
                   <?php echo $success_message; ?>
-                </div> 
+                </div>
               <?php endif; ?>
             </div>
           </form>
@@ -80,5 +80,3 @@ require_once 'header.php';
   </section>
   <?php
   require_once 'footer.php';
-  ?>
-

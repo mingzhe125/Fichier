@@ -1,28 +1,6 @@
 <?php
 
-//error_reporting(~E_ALL);
-
 session_start();
-//function my_session_start() {
-//  $sn = session_name();
-//  if (isset($_COOKIE[$sn])) {
-//    $sessid = $_COOKIE[$sn];
-//  } else if (isset($_GET[$sn])) {
-//    $sessid = $_GET[$sn];
-//  } else {
-//    return session_start();
-//  }
-//
-//  if (!preg_match('/^[a-zA-Z0-9,\-]{22,40}$/', $sessid)) {
-//    return false;
-//  }
-//  return session_start();
-//}
-//if (!my_session_start()) {
-//  session_id(uniqid());
-//  session_start();
-//  session_regenerate_id();
-//}
 
 require_once dirname(__FILE__) . '/language.php';
 require_once dirname(__FILE__) . '/class.db.php';
@@ -49,7 +27,6 @@ if (isset($_GET['method'])) {
       require_once(dirname(__FILE__) . '/mail.php');
 
       define('TO_EMAIL', 'vincent@enoxone.ch');
-//      define('TO_EMAIL', 'changhyang928@gmail.com');
       $emailContent = $_REQUEST['message'];
 
       $mail = new Mail();
@@ -61,7 +38,7 @@ if (isset($_GET['method'])) {
       $mail->setMailContent($emailContent);
       $mail->sendToMail();
 
-      $success_message = _t('Email has been sent successfully!');
+      $success_message = _t('Your email was sent!');
     }
   } else if ($_GET['method'] == 'attach') {
     if (empty($_SESSION['captcha']) || strtolower(trim($_REQUEST['captcha'])) != $_SESSION['captcha']) {
@@ -69,19 +46,20 @@ if (isset($_GET['method'])) {
     } else {
       require_once(dirname(__FILE__) . '/mail.php');
       $emailContent = '<h3>' . _t('Hello there') . ', </h3>'
-        . '<h4>' . _t('You received an email') . ': "' . $_REQUEST['from_email'] . '"</h4>'
-        . '<h4>' . _t('Here is the message') . ' : ' . $_REQUEST['message'] . '</h4>';
+              . '<h4>' . _t('You received an email') . ': "' . $_REQUEST['from_email'] . '"</h4>'
+              . '<h4>' . _t('Here is the message') . ' : ' . $_REQUEST['message'] . '</h4>';
       if (isset($_REQUEST['uploaded_files']) && !empty($_REQUEST['uploaded_files'])) {
         $emailContent .= '<h4>' . _t('Here is(are) the file(s) available for download') . ':</h4>'
-          . '<table>';
+                . '<table>';
+
         foreach ($_REQUEST['uploaded_files'] as $file_item) {
           $file_info = $my_db->select('fichier_files')
-            ->fields(array('title', 'file_name'))
-            ->where('id', $file_item)
-            ->run()
-            ->fetchAssoc();
+                  ->fields(array('title', 'file_name'))
+                  ->where('id', $file_item)
+                  ->run()
+                  ->fetchAssoc();
           $emailContent .= '<tr><td style = "border-top:1px solid #eee;"><a href = "' . $site_url . '/lib/download.php?file=' . $file_item . '">' . $file_info['file_name'] . '</a></td>'
-            . '<td style = "border-top:1px solid #eee;">' . $_REQUEST['uploaded_file_size'][$file_item] . '</td></tr>';
+                  . '<td style = "border-top:1px solid #eee;">' . $_REQUEST['uploaded_file_size'][$file_item] . '</td></tr>';
           $update_fiels = array('active' => 'A');
           if (isset($_REQUEST['filepassword']) && $_REQUEST['filepassword'] != '') {
             $update_fiels['password'] = md5($_REQUEST['filepassword']);
@@ -96,12 +74,12 @@ if (isset($_GET['method'])) {
       }
 
       $emailContent .= _t('<h3>"By clicking on the file you download the corresponding file"</h3>'
-        . '<h3>Best regards, '
-        . 'Fichier.ch <br/>
+              . '<h3>Best regards, '
+              . 'Fichier.ch <br/>
           Team <br/><br/>
           Service for sending free file!<br/>
           <a href = "http://www.creationdesite.net/~dev8/fichier/">www.fichier.ch</a>'
-        . '</h3>');
+              . '</h3>');
 
       $mail = new Mail();
       $mail->ContentType = 'text/html';
