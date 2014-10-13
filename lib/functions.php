@@ -11,9 +11,9 @@ if (isset($_GET['lang']) && $_GET['lang'] != '') {
 }
 
 $language = WLanguage::getInstance()->getLang();
-//$my_db = new db("mysql:host=localhost;dbname=creationdesitenet9", 'dev8', '9fmhd9hjr3ls');
-//$site_url = 'http://www.creationdesite.net/~dev8/fichier';
-$site_url = 'http://127.0.0.7/07_fichier/public_html';
+//$my_db = $my_db = new db("mysql:host=localhost;dbname=hoxone_fichier", 'fichier', 'Ke7s4dDT&*');
+//$site_url = 'http://www.fichiers.ch/';
+$site_url = 'http://172.16.1.70:1407/07_fichier/public_html';
 $my_db = new db("mysql:host=localhost;dbname=2014_07_fichier", 'root', '');
 
 $error_message = '';
@@ -41,7 +41,9 @@ if (isset($_GET['method'])) {
       $success_message = _t('Your email was sent!');
     }
   } else if ($_GET['method'] == 'attach') {
-    if (empty($_SESSION['captcha']) || strtolower(trim($_REQUEST['captcha'])) != $_SESSION['captcha']) {
+    require_once(dirname(__FILE__) . '/captcha.php');
+    $captcha = new captcha();
+    if ($captcha->resultCaptcha() != $_POST['captcha']) {
       $error_message = _t("Invalid captcha");
     } else {
       require_once(dirname(__FILE__) . '/mail.php');
@@ -60,7 +62,7 @@ if (isset($_GET['method'])) {
                   ->fetchAssoc();
           $emailContent .= '<tr><td style = "border-top:1px solid #eee;"><a href = "' . $site_url . '/lib/download.php?file=' . $file_item . '">' . $file_info['file_name'] . '</a></td>'
                   . '<td style = "border-top:1px solid #eee;">' . $_REQUEST['uploaded_file_size'][$file_item] . '</td></tr>';
-          $update_fiels = array('active' => 'A');
+          $update_fiels = array('active' => 'A', 'author' => $_REQUEST['from_email']);
           if (isset($_REQUEST['filepassword']) && $_REQUEST['filepassword'] != '') {
             $update_fiels['password'] = md5($_REQUEST['filepassword']);
           }

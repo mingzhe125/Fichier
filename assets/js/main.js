@@ -1,6 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
   $.fn.bootstrapValidator.validators.fileuploadstatus = {
-    validate: function(validator, $field, options) {
+    validate: function (validator, $field, options) {
       if ($('.uploaded_files .file-item').length > 0) {
         return true;
       } else {
@@ -9,6 +9,15 @@ $(document).ready(function() {
     },
     trigger: 'progress_end'
   };
+  var counter = 1;
+  setInterval(function () {
+    counter++;
+    $('.wrapper .main_back').removeClass('opaque');
+    $('.wrapper .main_back.bg_' + counter).addClass('opaque');
+    if (counter === 3) {
+      counter = 0;
+    }
+  }, 10000);
 
   $('.frm_contact').bootstrapValidator({
     message: _t('This value is not valid'),
@@ -85,11 +94,6 @@ $(document).ready(function() {
         validators: {
           notEmpty: {
             message: _t('The captcha is required and cannot be empty')
-          },
-          stringLength: {
-            min: 4,
-            max: 10,
-            message: _t('The captcha must be more than 4 and less than 10 characters long')
           }
         }
       }
@@ -98,12 +102,12 @@ $(document).ready(function() {
 
   resizeBody();
 
-  $(window).resize(function() {
+  $(window).resize(function () {
     resizeBody();
   });
 
   if ($('#dropbox').length > 0) {
-    $('#dropbox').on('click', function() {
+    $('#dropbox').on('click', function () {
       if (navigator.userAgent.search("Firefox") > -1) {
         $('#fileElem', $('.frm_contact')).trigger('click');
       } else {
@@ -118,7 +122,7 @@ $(document).ready(function() {
 
     $('#dropbox').tooltipster({
       animation: 'grow',
-      content: 'Glissez déposez vos fichiers',
+      content: _t('Drag? Your files here'),
       multiple: true,
       position: 'right',
       theme: 'tooltipster-light',
@@ -127,7 +131,7 @@ $(document).ready(function() {
 
     $('#from_email').tooltipster({
       animation: 'grow',
-      content: 'Ajouer votre   adresse email ici',
+      content: _t('Enter your email address here'),
       multiple: true,
       position: 'right',
       theme: 'tooltipster-light',
@@ -136,7 +140,7 @@ $(document).ready(function() {
 
     $('#to_email').tooltipster({
       animation: 'grow',
-      content: 'Ajouer les adresses email des destinataires',
+      content: _t('Email address of the recipient'),
       multiple: true,
       position: 'left',
       theme: 'tooltipster-shadow',
@@ -145,7 +149,7 @@ $(document).ready(function() {
 
     $('#inputMessage').tooltipster({
       animation: 'grow',
-      content: 'Joignez un message à votre transfert',
+      content: _t('Join message your transfer'),
       multiple: true,
       position: 'left',
       theme: 'tooltipster-shadow',
@@ -154,39 +158,23 @@ $(document).ready(function() {
 
     $('.confirm_btn').tooltipster({
       animation: 'grow',
-      content: 'Cliquez sur ce bouton pour démarrer le transfert',
+      content: _t('Click here to send? Your files'),
       multiple: true,
       position: 'right',
-      theme: 'tooltipster-noir',
+      theme: 'tooltipster-light',
       trigger: tolltip_trigger
     });
   }
 
-//	if ($(".fancy_pdf").length > 0) {
-//		$(".fancy_pdf").click(function() {
-//			fancy_width = $('.container').width() * 0.8;
-//			fancy_height = $(window).height() * 0.8;
-//			$.fancybox({
-//				'autoDimensions': false,
-//				'autosize': true,
-//				'content': '<embed src="' + this.href + '#nameddest=self&page=1&view=FitH,0&zoom=80,0,0" type="application/pdf" height="' + fancy_height + 'px" width="' + fancy_width + 'px" />',
-//				'onClosed': function() {
-//					$("#fancybox-inner").empty();
-//				}
-//			});
-//			return false;
-//		});
-//	}
-
   if ($('.fancy_image').length > 0) {
-    $(".fancy_image").click(function() {
+    $(".fancy_image").click(function () {
       fancy_width = $('.container').width() * 0.7;
       fancy_height = $(window).height() * 0.8;
       $.fancybox({
         'autoDimensions': false,
         'autosize': true,
         'content': '<img src="' + this.href + '" height="auto" width="' + fancy_width + 'px" />',
-        'onClosed': function() {
+        'onClosed': function () {
           $("#fancybox-inner").empty();
         }
       });
@@ -195,13 +183,13 @@ $(document).ready(function() {
   }
 
   if ($('.file_protect').length > 0) {
-    $('.file_protect').click(function() {
+    $('.file_protect').click(function () {
       $('.password-wrapper').show('medium');
     });
   }
 
   if ($('.site_help').length > 0) {
-    $('.site_help').click(function() {
+    $('.site_help').click(function () {
       $('#dropbox').trigger(tolltip_trigger);
       $('#from_email').trigger(tolltip_trigger);
       $('#to_email').trigger(tolltip_trigger);
@@ -209,7 +197,6 @@ $(document).ready(function() {
       $('.confirm_btn').trigger(tolltip_trigger);
     });
   }
-
 });
 
 function resizeBody() {

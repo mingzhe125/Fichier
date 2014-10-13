@@ -1,16 +1,12 @@
 .tooltipster-shadow {
-  width: 257px;
-  height: 101px;
-  padding: 11px 58px 0px 6px;
-  background: url('../..//img/tooltip_left.png') transparent no-repeat;
-  color: #626263;
-  margin-top: -40px;
-  margin-left: 30px;
+  border-radius: 5px;
+  background: #65515a;
+  text-align: right;
 }
 .tooltipster-shadow .tooltipster-content {
-  font-family: 'UniversalFruitCake';
-  font-size: 12px;
+  font-size: 25px;
+  font-family: 'Journal';
+  color: #fff;
   line-height: 16px;
-  padding: 8px 10px;
-  text-align: center;
+  padding: 12px 10px;
 }

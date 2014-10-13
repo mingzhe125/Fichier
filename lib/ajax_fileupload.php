@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__) . '/class.db.php';
-//$my_db = new db("mysql:host=localhost;dbname=creationdesitenet9", 'dev8', '9fmhd9hjr3ls');
+//$my_db = new db("mysql:host=localhost;dbname=hoxone_fichier", 'fichier', 'Ke7s4dDT&*');
 $my_db = new db("mysql:host=localhost;dbname=2014_07_fichier", 'root', '');
 
 if (isset($_REQUEST['method']) && $_REQUEST['method'] == 'delete') {

@@ -28,7 +28,7 @@ require_once './lib/functions.php';
             type: "POST",
             url: "lib/ajax_fileupload.php",
             data: {action: 'translate', key: key},
-            success: function() {
+            success: function () {
             }
           });
           return key;
@@ -44,45 +44,47 @@ require_once './lib/functions.php';
     <script type="text/javascript" src="assets/js/main.js"></script>
   </head>
   <body class="<?php echo $language; ?>">
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id))
-          return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <header class="navbar navbar-inverse" role="navigation">
-      <div class="header container-fluid">
-        <div class="navbar-header col-lg-2 col-md-3">
-          <a class="navbar-brand" href="./index.php">
+    <div class="wrapper container-fluid">
+      <img class="main_back bg_1 opaque" src="assets/img/main_back_1.jpg" alt="" />
+      <img class="main_back bg_2" src="assets/img/main_back_2.jpg" alt="" />
+      <img class="main_back bg_3" src="assets/img/main_back_3.jpg" alt="" />
+      <img class="bg_4" src="assets/img/maquette.png" alt="" />
+      <div class="header container text-center">
+        <div class="logo-wrapper col-lg-12">
+          <a class="logo" href="./index.php">
             <img src="./assets/img/logo.png" />
           </a>
         </div>
-        <div class="site-info col-lg-6 col-md-5">
-          <p><?php
-            _e('Send large files for free up');
-            echo '<span class="blue">&nbsp;&nbsp;';
-            _e('5 GB');
-            echo '&nbsp;&nbsp;</span>';
-            _e('transfer!');
-            ?></p>
+        <div class="site-info col-lg-12">
+          <p class="first-meta"><?php _e('Send large files for free'); ?></p>
+          <p class="second-meta"><?php _e('up to 5 GB per transfer!'); ?></p>
         </div>
-        <div class="navbar-collapse col-lg-4 col-md-4">
+        <ul class="setting-section col-lg-12">
+          <li class="first-meta"><?php _e('Security'); ?></li>
+          <li class="second-meta"><?php _e('Custom'); ?></li>
+          <li class="third-meta"><?php _e('Share'); ?></li>
+          <li class="fourth-meta"><?php _e('Large Files'); ?></li>
+          <li class="fifth-meta"><?php _e('Store'); ?></li>
+        </ul>
+        <div class="col-lg-12">
           <div class="navbar">
-            <div class="navbar-inner">
-              <ul class="nav">
-                <li><a class="france <?php echo $language == 'fr' ? 'actived' : ''; ?>" href="<?php echo add_query_arg('lang', 'fr'); ?>">FR</a></li>
-                <li><a class="england <?php echo $language == 'en' ? 'actived' : ''; ?>" href="<?php echo add_query_arg('lang', 'en'); ?>">EN</a></li>
-                <li><a class="espana <?php echo $language == 'es' ? 'actived' : ''; ?>" href="<?php echo add_query_arg('lang', 'es'); ?>">ES</a></li>
-              </ul>
-            </div>
+            <ul class="flag-nav">
+              <li>
+                <a class="france <?php echo $language == 'fr' ? 'actived' : ''; ?>" href="<?php echo add_query_arg('lang', 'fr'); ?>">
+                  <img alt="" src="assets/img/flag_es.png" />
+                </a>
+              </li>
+              <li>
+                <a class="england <?php echo $language == 'en' ? 'actived' : ''; ?>" href="<?php echo add_query_arg('lang', 'en'); ?>">
+                  <img alt="" src="assets/img/flag_en.png" />
+                </a>
+              </li>
+              <li>
+                <a class="espana <?php echo $language == 'es' ? 'actived' : ''; ?>" href="<?php echo add_query_arg('lang', 'es'); ?>">
+                  <img alt="" src="assets/img/flag_fr.png" />
+                </a>
+              </li>
+            </ul>
           </div>
         </div><!--/.navbar-collapse -->
       </div>
-    </header>

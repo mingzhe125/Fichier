@@ -1,60 +1,64 @@
-
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-/*@font-face {
-    font-family: 'ElegantIcons';
-    src:url('fonts/ElegantIcons.eot');
-    src:url('fonts/ElegantIcons.eot?#iefix') format('embedded-opentype'),
-        url('fonts/ElegantIcons.woff') format('woff'),
-        url('fonts/ElegantIcons.ttf') format('truetype'),
-        url('fonts/ElegantIcons.svg#ElegantIcons') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}*/
-
 @font-face {
-  font-family: 'Museo300';
-  src:url('../fonts/Museo300-Regular-webfont.eot');
-  src:url('../fonts/Museo300-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/Museo300-Regular-webfont.woff') format('woff'),
-    url('../fonts/Museo300-Regular-webfont.ttf') format('truetype'),
-    url('../fonts/Museo300-Regular-webfont.svg#MuseoIcons') format('svg');
+  font-family: 'RobotoThin';
+  src: url('../fonts/Roboto-Thin.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Museo100';
-  src: url('../fonts/museosansrounded-100-webfont.eot');
-  src: url('../fonts/museosansrounded-100-webfont.eot?#iefix') format('embedded-opentype');
+  font-family: 'RobotoBold';
+  src: url('../fonts/Roboto-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-  font-family: 'MyRiadProRegular';
-  src: url('../fonts/MYRIADPRO-REGULAR.OTF');
+  font-family: 'RobotoMedium';
+  src: url('../fonts/Roboto-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-  font-family: 'UniversalFruitCake';
-  src: url('../fonts/UNIVERSALFRUITCAKE.ttf');
+  font-family: 'RobotoRegular';
+  src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-  font-family: 'Museo900';
-  src: url('../fonts/museosansrounded-900-webfont.eot');
-  src: url('../fonts/museosansrounded-900-webfont.eot?#iefix') format('embedded-opentype');
+  font-family: 'RobotoLightItalic';
+  src: url('../fonts/Roboto-LightItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-  font-family: 'MuseoSlab900';
-  src: url('../fonts/Museo_Slab_900italic.otf');
+  font-family: 'RobotoLight';
+  src: url('../fonts/Roboto-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-  font-family: 'MuseoSlab300';
-  src: url('../fonts/Museo_Slab_300italic.otf');
+  font-family: 'RobotoBlack';
+  src: url('../fonts/Roboto-Black.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-  font-family: 'MuseoSlab500';
-  src: url('../fonts/Museo_Slab_500italic.otf');
+  font-family: 'LatoLight';
+  src: url('../fonts/Lato-Lig.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
+@font-face {
+  font-family: 'LatoBold';
+  src: url('../fonts/Lato-Bol.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Journal';
+  src: url('../fonts/JOURNAL.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html{
   width: 100%;
   height: 100%;
@@ -64,475 +68,385 @@ body{
   height: 100%;
   margin: 0px;
   padding: 0px;
+  color: #fff;
 }
-
 .clear{
   float: none;
   clear: both;
 }
-.navbar{
-  min-height: 56px;
-  background-color: #fff;
-  margin-bottom: 0px;
+.icon{
+  display:inline-block;
+  cursor: pointer;
 }
-.navbar-inverse{
-  background-color: #fff;
-  background-image: none;
-  border-color: #fff;
+.alert-warning, .alert-success{
+  padding: 10px;
+  font-size: 18px;
+  font-family: 'RobotoBold';
 }
-.navbar-brand{
-  float: none;
-  display: inline-block;
-  padding-top: 5px;
-  padding-bottom: 0px;
+.wrapper{
+  position: relative;
+  /*  background: url('../img/maquette.png') transparent no-repeat center center;*/
+  /*background-size: 100% 100%;*/
 }
-.navbar-header{
-  text-align: center;
+.wrapper .main_back{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+
+  background-size: 100% 100%;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+  opacity:0;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+.wrapper .bg_4{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+}
+.wrapper .main_back.opaque {
+  opacity:1;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=1);
+}
+/*Header Section*/
+.header .logo-wrapper{
+  margin-top: 65px;
+  margin-bottom: 35px;
 }
 .site-info{
-  font-family: 'Museo300';
-  font-size: 18px;
-  color: #919191;
+  font-size: 38px;
 }
 .site-info p{
+  margin-top: 0px;
   margin-bottom: 0px;
-  text-align: center;
-  padding: 15px 0px;
 }
-.site-info .blue{
-  font-size: 24px;
-  color: #0e518d;
-  font-family: 'Museo900';
-  font-weight: bold;
+.site-info .first-meta{
+  font-family: 'RobotoThin';
 }
-.nav{
-  margin-top: 10px;
-  text-align: center;
+.site-info .second-meta{
+  font-family: 'RobotoBold';
+  color: #ed145b;
+  margin-top: -10px;
 }
-.nav > li{
-  float: none;
+.setting-section{
+  margin-top: 20px;
+}
+.setting-section li{
+  background: url('../img/header_bg.png') transparent no-repeat center center;
+  width: 96px;
+  height: 98px;
+  list-style: none;
   display: inline-block;
-  line-height: 36px;
-  margin-right: 15px;
+  padding-top: 60px;
+  margin-bottom: 10px;
 }
-.nav > li > a{
-  color: #919191;
-  font-size: 11px;
-  font-family: "Museo300";
-  padding-left: 25px;
-  padding-top: 0px;
+.setting-section .second-meta{
+  background-position: -105px 0px;
 }
-.nav > li > a.actived{
-  color: #428bca;
+.setting-section .third-meta{
+  background-position: -210px 0px;
 }
-.nav > li > a.france, .nav > li > a.france:hover{
-  background: url('../img/flag_french.png') transparent no-repeat center left;
+.setting-section .fourth-meta{
+  background-position: -314px 0px;
 }
-.nav > li > a.england, .nav > li > a.england:hover{
-  background: url('../img/flag_england.png') transparent no-repeat center left;
+.setting-section .fifth-meta{
+  background-position: -419px 0px;
 }
-.nav > li > a.espana, .nav > li > a.espana:hover{
-  background: url('../img/flag_espana.png') transparent no-repeat center left;
+.flag-nav{
+  padding: 0px;
+  max-width: 513px;
+  margin: 15px auto 0px;
+  background: url('../img/lang_bg.png') transparent center center no-repeat;
 }
-.nav > li:hover a{
-  background: none;
+.navbar{
+  margin-bottom: 0px;
 }
+.flag-nav li{
+  list-style: none;
+  display: inline-block;
+}
+.flag-nav li a{
+  display: block;
+  width: 19px;
+  height: 19px;
+}
+.flag-nav li a img{
+  margin-top: -3px;
+}
+/*End Header Section*/
 
-.main{
-  width: 100%;
-  background: url('../img/main_back.jpg') transparent top center no-repeat;
-  background-size: 100% 100%;
+/*File Upload Page*/
+#fileuploadpage h1{
+  font-size: 45px;
+  font-family: 'RobotoMedium';
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+#fileuploadpage .info-meta{
+  margin-top: -5px;
+  font-size: 22px;
+  font-family: 'RobotoLightItalic';
+}
+#fileuploadpage .main-content .frm_contact
+,#fileuploadpage .main-content .message-wrapper{
+  max-width: 500px;
+  margin: 0px auto;
+}
+#fileuploadpage .main-content button{
+  font-size: 13px;
+  font-family: 'RobotoLight';
+  text-align: center;
+  padding: 0px 10px;
+  background: #ed145b;
+  border: none;
+  color: #fff;
+  height: 30px;
+
+  -webkit-box-shadow: 3px 4px 5px 0px rgba(50, 50, 50, 0.15);
+  -moz-box-shadow:    3px 4px 5px 0px rgba(50, 50, 50, 0.15);
+  box-shadow:         3px 4px 5px 0px rgba(50, 50, 50, 0.15);
+}
+#fileElem{
+  z-index: 0;
+  height: 0px;
+  width: 0px;
+  font-family: 'Journal';
+}
+.fileupload{
+  width: 14px;
+  height: 12px;
+  background: url(../img/ico_fileupload.png) transparent no-repeat center center;
   position: relative;
+  top: 2px;
+  right: 2px;
 }
-.main section.container-fluid{
-  margin-top: -49px;
+.password-wrapper{
+  display: none;
 }
-.en .main section.container-fluid{
-  background: url('../img/main_back_en.png') transparent top 15px center no-repeat;
+.form-group{
+  overflow: hidden;
 }
-.es .main section.container-fluid{
-  background: url('../img/main_back_es.png') transparent top 15px center no-repeat;
+.site_help{
+  width: 24px;
+  height: 24px;
+  background: url('../img/ico_help.png') #ed145b no-repeat center center;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  margin-right: 10px;
 }
-.fr .main section.container-fluid{
-  background: url('../img/main_back_fr.png') transparent top 15px center no-repeat;
+.icon_wrapper{
+  display: inline-block;
+  padding: 0px 15px;
+  background-color: #ed145b;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  height: 24px;
+
+  position: relative;
+  top: -7px;
 }
-.main .main_top{
-  width: 100%;
-  height: 49px;
-  background: url('../img/main_top_back.png') transparent top center repeat;
+.file_protect{
+  background: url('../img/ico_fileprotect.png') transparent no-repeat left center;
+  padding-left: 15px;
+  line-height: 24px;
 }
-.main-content{
-  margin-top: 175px;
-  margin-bottom: 150px;
-  background: url('../img/main_content_back.png') transparent repeat;
+.form-group{
+  margin-bottom: 10px;
+}
+.form-group input, .form-group textarea{
+  background-color: #fff!important;
+  border: none;
+  padding: 10px 30px;
+
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  padding: 10px;
-}
 
-.main-content .inner-content{
-  background-color: #fff;
-}
-.main-content .inner-content{
-  float: left;
-  width: 100%;
-}
-.main-content .content-header{
-  padding: 10px 24px;
-  height: 41px;
-  background: url('../img/content_header_back.png') #0286e6 repeat;
-  font-family: 'Museo900';
-  font-size: 18px;
-  color: #fff;
-  font-weight: bold;
-}
-.main-content .content-header:before{
-  display: block;
-  width: 10px;
-  height: 51px;
-  content: ' ';
-  background: url('../img/content_header_right.png') transparent no-repeat;
-  position: absolute;
-  right: 0;
-  top: 10px;
-}
-.main-content .content-body{
-  font-family: 'MuseoSlab300';
-  color: #4a4a4a;
-  min-height: 100px;
-  padding: 30px 20px;
-  font-size: 18px;
-  line-height: 1.7;
-}
-#stuffpage .main-content .content-body{
-  font-size: 18px;
-  line-height: 1.7;
-}
-#contactpage .main-content .content-body{
-  font-size: 12px;
-}
-#contactpage .main-content .content-body sup{
-  padding-left: 5px;
-  color: red;
-}
-#stuffpage .main-content .file-items{
-  font-size: 14px;
-  color: #4e4e4e;
-  font-family: 'MuseoSlab500';
-  text-align: center;
-}
-#stuffpage .main-content .file-items .file-item{
+  color: #666!important;
+  display: inline-block;
   margin-bottom: 10px;
-  overflow: hidden;
-  width: 140px;
-  height: 200px;
-  float: left;
-  margin-left: 10px;
-}
-#stuffpage .main-content .file-items .file-item img{
-  width: 140px;
-  height: 140px;
-}
-#stuffpage .main-content .file-items .file-item .file-title{
-  margin-top: 5px;
-}
-#fileuploadpage .frm_contact{
-  float: left;
-  background: url('../img/frm_upload_back.png') #fff bottom left no-repeat;
-  background-size: 100%;
-  width: 100%;
-}
-#fileuploadpage .main-content .content-body{
-  padding-bottom: 0px;
-}
-#fileuploadpage .main-content .content-body.hr{
-  border-bottom: 1px solid #eee;
-}
-#fileuploadpage .main-content .content-body button{
-  font-size: 14px;
-  text-align: center;
-  padding-left: 20px;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-}
-#fileuploadpage .main-content .confirm_btn{
-  text-align: center;
-}
-#fileuploadpage .container input{
-  width: 100%;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  padding: 8px 30px;
-  background-color: #efefef;
-}
-#fileuploadpage .has-error .form-control-feedback, 
-#fileuploadpage .has-success .form-control-feedback{
-  margin-top: 10px;
-}
-#fileuploadpage .form-group-dropbox .form-control-feedback{
-  margin-top: 4px;
-}
-#fileuploadpage #to_email{
-  background: url('../img/ico_tomail.png') transparent no-repeat 6px 12px;
-}
-#fileuploadpage #from_email{
-  background: url('../img/ico_email.png') transparent no-repeat 8px 18px;
-}
-#fileuploadpage input:before {
-  content: "\e008";
-}
-#fileuploadpage .uploaded_files{
-  margin-bottom: 5px;
-  border-top: 2px solid #666;
-  border-bottom: 2px solid #666;
-  padding: 0px;
-}
-#fileuploadpage .uploaded_files ul, .upload-progress ul{
-  font-size: 14px;
-  display: table;
-  width: 100%;
-  padding: 0px;
-  margin: 0px;
-  text-align: left;
-  table-layout: fixed;
-}
-#fileuploadpage .uploaded_files ul li, .upload-progress ul li{
-  list-style: none;
-  display: table-cell;
-  vertical-align: middle;
-  padding: 5px 1px;
-  border-bottom: 1px solid #eee;
-  line-height: 18px;
 
+  -webkit-box-shadow: 3px 4px 5px 0px rgba(50, 50, 50, 0.15);
+  -moz-box-shadow:    3px 4px 5px 0px rgba(50, 50, 50, 0.15);
+  box-shadow:         3px 4px 5px 0px rgba(50, 50, 50, 0.15);
 }
-.upload-progress ul li{
-  border-bottom: none;
+.form-group input{
+  height: 30px;
+  width: 100%;
 }
-#fileuploadpage .uploaded_files ul li.number{
-  width: 4%;
+.form-group.to_email, .form-group.from_email{
+  width: 49%;
 }
-#fileuploadpage .uploaded_files ul li.file_name{
-  width: 48%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
+.form-group #to_email{
+  background: url('../img/ico_tomail.png') transparent no-repeat 11px 8px;
 }
-#fileuploadpage .uploaded_files ul li.file_size{
+.form-group #from_email{
+  background: url('../img/ico_frommail.png') transparent no-repeat 9px 7px;
+}
+.form-group #inputMessage{
+  background: url('../img/ico_message.png') transparent no-repeat 11px 13px;
+  margin: 0px;
+}
+.form-group .num-capture{
+  float: left;
+  margin-right: 10px;
+  display: inline-block;
+  line-height: 30px;
+}
+.form-group.num_captcha{
   width: 15%;
 }
-#fileuploadpage .uploaded_files ul li.upload_progress{
-  width: 10%;
-}
-#fileuploadpage .uploaded_files ul li.upload_status{
-  width: 10%;
-  background-size: 18px!important;
-}
-#fileuploadpage .uploaded_files ul li.file_action{
-  width: 13%;
-}
-.upload-progress{
-  display: none;
-  height: 47px;
-}
-#fileuploadpage .upload-progress ul li.total_files{
-  width: 35%;
-}
-#fileuploadpage .upload-progress ul li.progress-holder{
-  width: 35%;
-}
-#fileuploadpage .upload-progress ul li.total_size{
-  width: 20%;
-}
-#fileuploadpage .upload-progress ul li.percents{
-  width: 10%;
-}
-#speed_any{
-  font-size: 10px;
-}
-#progress{
-  height: 10px;
-  display:block;
-  width: 0%;
-  background: url('../img/progress_bar.jpg') transparent repeat-x;
-}
-.preview{
+.form-group #num_captcha{
   padding: 10px;
-  height:auto;
-  overflow: auto;
-  text-align: center;
-}
-
-#fileuploadpage .confirm_btn button{
-  width: 143px;
-  height: 40px;
-  background: url('../img/btn_upload.png') transparent no-repeat;
-  display: block;
-  color: #707375;
-  font-family: 'MyRiadProRegular';
-  font-size: 14px;
-  padding: 10px;
-  text-decoration: none;
-  margin: 0px auto;
-  border: none;
-  outline: none;
-}
-#fileuploadpage .password-wrapper{
-  display: none;
-}
-#fileuploadpage .file_protect{
-  width: 13px;
-  height: 13px;
-  background: url('../img/icon_key.png') transparent no-repeat;
-  display: inline-block;
-  float: right;
-  margin-top: -15px;
-  cursor: pointer;
-}
-#fileuploadpage .site_help{
-  width: 16px;
-  height: 14px;
-  background: url('../img/icon_help.png') transparent no-repeat;
-  display: inline-block;
-  float: left;
-  margin-top: -15px;
-  cursor: pointer;
-}
-.main .footer{
-  background: url('../img/footer_back.png') transparent repeat-x;
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
   width: 100%;
 }
-.footer .footer-info{
-  color: #fefefe;
-  font-size: 14px;
+.uploaded_files{
+  margin-bottom: 10px;
+  padding: 10px 10px 0px;
+  background: url('../img/file_upload_bg.png') transparent repeat;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  display: none;
 }
-.footer .footer-info p{
-  line-height: 1;
-  margin-top: 10px;
+.uploaded_files .uploaded_file_item{
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  overflow: hidden;
 }
-.footer .footer-info p.first{
-  font-family: 'MuseoSlab300';
+.uploaded_files .uploaded_file_item li{
+  float:left;
+  list-style: none;
+  font-size: 13px;
+  font-family: 'RobotoRegular';
+  padding-right: 10px;
+  text-align: left;
 }
-.footer .footer-info p.second{
-  font-family: 'MuseoSlab500';
+.uploaded_files .uploaded_file_item li:last-child{
+  padding-right: 0px;
 }
-.footer .footer-info p.third{
-  color: #fefefe;
-  font-family: 'Museo100';
-  font-size: 12px;
-  margin-top: 35px;
+.uploaded_files .uploaded_file_item li.number span{
+  display: inline-block;
+  font-family: 'RobotoBlack';
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  max-width: 100%;
+  background-color: #ed145b;
+
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
 }
-.footer .footer-info p a{
+.uploaded_files .uploaded_file_item li.number{
+  width: 10%;
+  text-align: center;
+}
+.uploaded_files .uploaded_file_item li.file_name{
+  width: 40%;
+}
+.uploaded_files .uploaded_file_item li.file_size{
+  width: 15%;
+}
+.uploaded_files .uploaded_file_item li.upload_progress{
+  width: 20%;
+  text-align: center;
+}
+.uploaded_files .uploaded_file_item li.upload_progress .progress{
+  background: #ed145b;
+  display: inline-block;
+  font-family: 'RobotoBold';
+  width: 0%;
+  float:left;
+}
+.uploaded_files .uploaded_file_item li.file_action{
+  width: 15%;
+}
+.uploaded_files .uploaded_file_item li.file_action a{
   color: #fff;
+  font-size: 12px;
+  font-family: 'RobotoMedium';
+  text-decoration: none;
+  padding-left: 20px;
+  background: url('../img/ico_delete.png') transparent no-repeat left center;
+}
+input[type='image']{
+  outline: none;
+}
+.social-icons{
+  margin: 35px auto 15px;
+}
+.social-icons > div{
+  width: 120px;
+  height: 104px;
+  display: inline-block;
+  overflow: hidden;
+}
+.social-icons .like_facebook{
+  margin-right: 20px;
+}
+.footer *{
+  color: #fff;
+  font-size: 11px;
   text-decoration: none;
 }
-.footer .footer-info p.third{
-  font-family: 'Museo300';
+.footer p{
+  margin-bottom: 0px;
+}
+.footer .first{
+  font-family: 'LatoLight';
+}
+.footer .two{
+  font-family: 'LatoBold';
+}
+.footer .two a:hover{
+  text-decoration: none;
+  color: #fff;
+}
+.footer .footer-social{
+  margin: 20px auto;
+}
+.footer .footer-meta{
+  margin-bottom: 20px;
+}
+.footer .footer-meta p{
+  font-family: 'Arial';
+  font-size: 11px;
+  color: #999;
 }
 
-@media (max-width: 1200px){
-  .footer .footer-info p.third{
-    margin-top: 10px;
-  }
-}
-@media (min-width: 992px) and (max-width: 1200px) {
-  .header .site-info{
-    text-align: left;
-  }
-  .header .navbar-collapse{
-    text-align: right;
-  }
-}
-@media (max-width: 991px) {
-  .social-icons{
-    display: none;
-  }
-  .main section.container-fluid{
-    background: none!important;
-    padding-bottom: 150px!important;
-  }
-  .tooltipster-base{
-    display: none!important;
-  }
-  .main-content{
-    margin-top: 80px;
-    margin-bottom: 20px;
-    float: left;
-  }
-}
-@media (max-width: 767px) {
-  .social-icons{
-    display: none;
-  }
-  .main section.container-fluid{
-    background: none!important;
-    padding-bottom: 150px!important;
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-  .container{
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-  .tooltipster-base{
-    display: none!important;
-  }
-  .main-content{
-    margin-top: 80px;
-    margin-bottom: 20px;
-    float: left;
-  }
-  #fileuploadpage .uploaded_files ul li.number{
-    width: 4%;
-  }
-  #fileuploadpage .uploaded_files ul li.file_name{
-    width: 40%;
-  }
-  #fileuploadpage .uploaded_files ul li.file_size{
-    width: 20%;
-  }
-  #fileuploadpage .uploaded_files ul li.upload_progress{
-    width: 13%;
-  }
-  #fileuploadpage .uploaded_files ul li.upload_status{
-    width: 10%;
-    background-size: 18px!important;
-  }
-  #fileuploadpage .uploaded_files ul li.file_action{
-    width: 13%;
-  }
-  #fileuploadpage .uploaded_files ul, .upload-progress ul{
-    font-size: 10px;
-  }
-}
+/*Main Page Section*/
+#main-page{
+  background-color: #fff;
+  padding: 80px;
+  max-width: 778px;
+  margin: 20px auto 0px;
 
-#fileElem{
-  z-index: 0;
-  margin-top: -56px;
-  height: 39px;
-  margin-bottom: 10px;
-  /*display: none;*/
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  position: relative;
 }
-
-.social-icons{
-  position: fixed;
-  left: 0px;
-  top: 250px;
-
+#main-page *{
+  text-align: left;
+  font-family: 'RobotoLight';
 }
-.social-icons .facebook-icon{
-  background: url('../img/facebook_back.png') transparent no-repeat;
-  padding: 35px 28px;
-  width: 99px;
-  height: 138px;
+#main-page h1{
+  color: #ed145b;
+  font-size: 33px;
 }
-.social-icons .paypal-donate{
-  margin-left: 21px;
+#main-page .page-content{
+  color: #606060;
+  font-size: 13px;
 }

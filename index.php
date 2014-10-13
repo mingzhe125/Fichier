@@ -14,69 +14,75 @@ require_once 'header.php';
 <script type="text/javascript" src="assets/js/SizeStructure.js"></script>
 <script type="text/javascript" src="assets/js/TimeStructure.js"></script>
 <script type="text/javascript" src="assets/js/script.js"></script>
-<div class="main" id='fileuploadpage'>
-  <div class="main_top"></div>
-  <section class="container-fluid">
-    <div class="container">
-      <div class="main-content col-lg-6 col-md-6 col-sm-8 col-xs-12 col-lg-offset-3 col-md-offset-3 col-sm-offset-2">
-        <div class="inner-content">
-          <div class="content-header"><p><?php _e('Files up to 5GB'); ?></p></div>
-          <form class='frm_contact' action="<?php echo add_query_arg('method', 'attach'); ?>" method="post">
-            <div class="content-body col-lg-12 hr">
-              <div class="form-group form-group-dropbox">
-                <!--<input id="uploaded_files_list" name="uploaded_files_list" class="uploaded_files_list" value="" />-->
-                <button id='dropbox' data-bv-trigger="progress_end" name="dropbox" type="text" class="dropbox btn btn-default btn-lg btn-block"><span class="glyphicon glyphicon-plus-sign"></span> <?php _e('Your file (s)'); ?></button>
-              </div>
-              <input type="file" id="fileElem" multiple="true" accept="*" onchange="handleFiles(this.files)">
-              <div class="uploaded_files">
-              </div>
-              <div class="upload-progress"></div>
-            </div>
-            <div class="content-body col-lg-12 hr">
-              <div class="form-group">
-                <input type="email" class="input-group" name="to_email" id="to_email" value="" placeholder="<?php _e('Email Sender'); ?>" />
-              </div>
-            </div>
-            <div class="content-body col-lg-12">
-              <div class="form-group">
-                <input type="email" class="input-group" name="from_email" id="from_email" value="" placeholder="<?php _e('Your Email'); ?>" />
-              </div>
-              <div class="form-group">
-                <textarea rows='5' class='form-control' id='inputMessage' name="message"  placeholder="<?php _e('Your Message'); ?>"></textarea>
-              </div>
-              <img src="lib/captcha.php" />
-              <div class='form-group'>
-                <label for="inputCapture"><?php _e('Enter the code'); ?><sup>*</sup></label>
-                <input type="text" class="form-control" id="inputCapture" name="captcha" />
-              </div>
-              <div class="form-group password-wrapper">
-                <label for="filepassword"><?php _e('Enter the password for protect file'); ?></label>
-                <input type="password" class="form-control" id='inputFilePassword' name='filepassword' />
-              </div>
-              <div class="form-group confirm_btn">
-                <button id="confirm_btn" type="submit" ><?php _e('Send the file'); ?></button>
-                <span class='site_help'></span>
-                <span class='file_protect'></span>
-              </div>
-            </div>
-            <div class="content-body col-lg-12" style="min-height: 0px;padding: 0px 20px;font-size: 14px;">
-              <?php if (!empty($error_message)) : ?>
-                <div class="alert alert-warning">
-                  <a href="#" class="close" data-dismiss="alert">&times;</a>
-                  <?php echo $error_message; ?>
-                </div>
-              <?php endif; ?>
-              <?php if (!empty($success_message)) : ?>
-                <div class="alert alert-success">
-                  <a href="#" class="close" data-dismiss="alert">&times;</a>
-                  <?php echo $success_message; ?>
-                </div>
-              <?php endif; ?>
-            </div>
-          </form>
+
+<div class="container" id="fileuploadpage">
+  <div class="main-content col-lg-12 text-center">
+    <?php if (!empty($success_message)) : ?>
+      <div class="message-wrapper">
+        <div class="alert alert-success">
+          <?php echo $success_message; ?>
         </div>
+        <form action="">
+          <button class="btn btn-default"><?php _e('Try again'); ?></button>
+        </form>
       </div>
-    </div>
-  </section>
-  <?php
-  require_once 'footer.php';
+    <?php else :
+      ?>
+      <h1><?php _e('Your files up to 5GB'); ?></h1>
+      <p class="info-meta"><?php _e('encrypted access, fast and free'); ?></p>
+      <form class='frm_contact' action="<?php echo add_query_arg('method', 'attach'); ?>" method="post">
+        <div class="uploaded_files"></div>
+        <div class="upload-progress"></div>
+        <div class="form-group form-group-dropbox">
+          <button id='dropbox' data-bv-trigger="progress_end" name="dropbox" type="text" class="dropbox btn btn-default btn-lg btn-block">
+            <span class="icon fileupload"></span> <?php _e('Add a file'); ?>
+          </button>
+        </div>
+        <input type="file" id="fileElem" multiple="true" accept="*" onchange="handleFiles(this.files)">
+        <div class="form-group password-wrapper">
+          <label for="filepassword" id="filepassword" class="pull-left"><?php _e('Enter the password for protect file'); ?></label>
+          <input type="password" class="form-control pull-right" id='inputFilePassword' name='filepassword' />
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+          <span class='icon site_help'></span>
+          <span class='icon_wrapper'><span class="icon file_protect"><?php _e('Protect your files'); ?></span></span>
+        </div>
+        <div class="form-group pull-left to_email">
+          <input type="email" class="input-group pull-left" name="to_email" id="to_email" value="" placeholder="<?php _e('Recipient\'s email address'); ?>" />
+        </div>
+        <div class="form-group pull-right from_email">
+          <input type="email" class="input-group pull-right" name="from_email" id="from_email" value="" placeholder="<?php _e('Your email address'); ?>" />
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+          <textarea rows='5' class='form-control' id='inputMessage' name="message"  placeholder="<?php _e('Your Message'); ?>"></textarea>
+        </div>
+        <?php
+        require_once './lib/captcha.php';
+
+        $captcha = new captcha();
+        $captcha->generateCaptcha();
+        ?>
+        <div class='form-group pull-left'>
+          <?php echo $captcha->showCaptcha(); ?>
+        </div>
+        <div class="form-group pull-left num_captcha">
+          <input type="text" class="form-control" id="num_captcha" name="captcha" />
+        </div>
+        <div class="form-group confirm_btn">
+          <button id="confirm_btn" class="btn btn-default pull-right" type="submit" ><?php _e('Email(s) file(s)'); ?></button>
+        </div>
+        <div class="clearfix"></div>
+        <?php if (!empty($error_message)) : ?>
+          <div class="alert alert-warning">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <?php echo $error_message; ?>
+          </div>
+        <?php endif; ?>
+      </form>
+    <?php endif; ?>
+  </div>
+</div>
+<?php
+require_once 'footer.php';

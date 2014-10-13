@@ -11,7 +11,7 @@ if (empty($_REQUEST['file'])) {
 $file_id = $_REQUEST['file'];
 
 require_once dirname(__FILE__) . '/class.db.php';
-//$my_db = new db("mysql:host=localhost;dbname=creationdesitenet9", 'dev8', '9fmhd9hjr3ls');
+//$my_db = new db("mysql:host=localhost;dbname=hoxone_fichier", 'fichier', 'Ke7s4dDT&*');
 $my_db = new db("mysql:host=localhost;dbname=2014_07_fichier", 'root', '');
 
 $file_item = $my_db->select('fichier_files')
