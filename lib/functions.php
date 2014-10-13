@@ -16,6 +16,8 @@ $language = WLanguage::getInstance()->getLang();
 $site_url = 'http://172.16.1.70:1407/07_fichier/public_html';
 $my_db = new db("mysql:host=localhost;dbname=2014_07_fichier", 'root', '');
 
+$my_db->query('DELETE FROM fichier_files WHERE DATEDIFF(current_date(), created_at) > 15')->execute();
+
 $error_message = '';
 $success_message = '';
 

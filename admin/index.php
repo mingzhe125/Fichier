@@ -56,7 +56,7 @@ $files_data = $my_db->select('fichier_files')
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html"><?php _e('Fichier Admin v 1.0'); ?></a>
+          <a class="navbar-brand" href="index.php"><?php _e('Fichier Admin v 1.0'); ?></a>
         </div>
         <!-- /.navbar-header -->
 
@@ -95,7 +95,7 @@ $files_data = $my_db->select('fichier_files')
                 <!-- /input-group -->
               </li>
               <li>
-                <a  class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i><?php _e('Dashboard'); ?></a>
+                <a  class="active" href="index.php"><i class="fa fa-dashboard fa-fw"></i><?php _e('Dashboard'); ?></a>
               </li>
             </ul>
           </div>
